@@ -1,0 +1,1519 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Choose Template | HB Innovations</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+          rel="stylesheet">
+
+    <style>
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            background: #080b12;
+            color: white;
+        }
+
+        .page {
+            padding: 50px 6%;
+        }
+
+        .heading {
+            text-align: center;
+            margin-bottom: 45px;
+        }
+
+        .heading h1 {
+            font-size: 38px;
+            font-weight: 800;
+
+            background: linear-gradient(
+                90deg,
+                #ffffff,
+                #9d8cff
+            );
+
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .heading p {
+            color: #858b99;
+            margin-top: 10px;
+        }
+
+        .template-grid {
+            display: grid;
+
+            grid-template-columns:
+                repeat(auto-fit, minmax(260px, 1fr));
+
+            gap: 25px;
+
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .template-card {
+            background: rgba(255,255,255,0.04);
+
+            border: 1px solid rgba(255,255,255,0.08);
+
+            border-radius: 18px;
+
+            padding: 15px;
+
+            transition: 0.35s;
+
+            animation: cardAppear 0.6s ease;
+        }
+
+        .template-card:hover {
+            transform: translateY(-8px);
+
+            border-color: rgba(124,92,255,0.6);
+
+            box-shadow:
+                0 20px 40px rgba(0,0,0,0.35),
+                0 0 25px rgba(124,92,255,0.12);
+        }
+
+        .preview {
+            height: 300px;
+
+            border-radius: 12px;
+
+            overflow: hidden;
+
+            background: white;
+
+            color: #222;
+
+            padding: 20px;
+
+            position: relative;
+        }
+
+        /* Template 1 */
+
+        .template-1 .name {
+            color: #4169e1;
+            font-size: 23px;
+            font-weight: bold;
+        }
+
+        .template-1 .line {
+            height: 4px;
+            width: 70px;
+            background: #4169e1;
+            margin: 8px 0 15px;
+        }
+
+        /* Template 2 */
+
+        .template-2 {
+            border-left: 35px solid #222;
+        }
+
+        .template-2 .name {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        /* Template 3 */
+
+        .template-3 {
+            text-align: center;
+        }
+
+        .template-3 .name {
+            font-size: 23px;
+            font-weight: bold;
+            letter-spacing: 2px;
+        }
+
+        /* Template 4 */
+
+        .template-4 {
+            background: #151922;
+            color: white;
+        }
+
+        .template-4 .name {
+            color: #8c7cff;
+            font-size: 23px;
+            font-weight: bold;
+        }
+
+        /* Template 5 */
+
+        .template-5 {
+            border-top: 35px solid #7c5cff;
+        }
+
+        .template-5 .name {
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        /* Template 6 */
+
+        .template-6 {
+            background: #faf7f2;
+        }
+
+        .template-6 .name {
+            color: #8b5e3c;
+            font-size: 23px;
+            font-weight: bold;
+        }
+
+        /* Template 7 */
+
+        .template-7 {
+            display: flex;
+            gap: 15px;
+        }
+
+        .template-7 .side {
+            width: 30%;
+            background: #e9eef8;
+        }
+
+        .template-7 .content {
+            flex: 1;
+        }
+
+        /* Template 8 */
+
+        .template-8 {
+            border: 2px solid #222;
+        }
+
+        .template-8 .name {
+            font-size: 23px;
+            font-weight: bold;
+        }
+
+        /* Template 9 */
+
+        .template-9 {
+            background:
+                linear-gradient(
+                    135deg,
+                    #eeeeff,
+                    #ffffff
+                );
+        }
+
+        .template-9 .name {
+            color: #673ab7;
+            font-size: 23px;
+            font-weight: bold;
+        }
+
+        /* Template 10 */
+
+        .template-10 {
+            background: #f5f5f5;
+            text-align: left;
+        }
+
+        .template-10 .name {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .fake-line {
+            height: 6px;
+            background: #ddd;
+            border-radius: 5px;
+            margin: 12px 0;
+        }
+
+        .small-line {
+            height: 5px;
+            width: 70%;
+            background: #ddd;
+            border-radius: 5px;
+            margin: 8px 0;
+        }
+
+        .template-title {
+            text-align: center;
+
+            font-size: 17px;
+            font-weight: 700;
+
+            margin: 15px 0;
+        }
+
+        .select-btn {
+            display: block;
+
+            width: 100%;
+
+            padding: 10px;
+
+            border-radius: 10px;
+
+            background: linear-gradient(
+                135deg,
+                #7c5cff,
+                #6244e8
+            );
+
+            color: white;
+
+            text-decoration: none;
+
+            text-align: center;
+
+            font-weight: 600;
+
+            transition: 0.3s;
+        }
+
+        .select-btn:hover {
+            color: white;
+
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 8px 20px rgba(124,92,255,0.3);
+        }
+
+        @keyframes cardAppear {
+
+            from {
+                opacity: 0;
+                transform: translateY(25px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+        }
+
+    </style>
+</head>
+
+<body>
+
+<div class="page">
+
+    <div class="heading">
+
+        <h1>Choose Your Resume Template</h1>
+
+        <p>
+            Select a design you like. Your saved details will
+            automatically appear in the selected template.
+        </p>
+
+    </div>
+
+
+    <div class="template-grid">
+
+
+        <!-- Template 1 -->
+
+        <div class="template-card">
+
+            <div class="preview template-1">
+
+                <div class="name">
+                    YOUR NAME
+                </div>
+
+                <div class="line"></div>
+
+                <strong>PROFILE</strong>
+
+                <div class="small-line"></div>
+                <div class="small-line"></div>
+
+                <br>
+
+                <strong>EDUCATION</strong>
+
+                <div class="fake-line"></div>
+
+                <strong>SKILLS</strong>
+
+                <div class="small-line"></div>
+
+            </div>
+
+            <div class="template-title">
+                Modern Blue
+            </div>
+
+            <a href="{{ url_for('resume.resume_template', template='1') }}"
+               class="select-btn">
+                Select Template →
+            </a>
+
+        </div>
+
+
+        <!-- Template 2 -->
+
+        <div class="template-card">
+
+            <div class="preview template-2">
+
+                <div class="name">
+                    YOUR NAME
+                </div>
+
+                <p>Professional Resume</p>
+
+                <strong>ABOUT ME</strong>
+
+                <div class="small-line"></div>
+                <div class="small-line"></div>
+
+                <br>
+
+                <strong>EXPERIENCE</strong>
+
+                <div class="fake-line"></div>
+
+                <strong>SKILLS</strong>
+
+                <div class="small-line"></div>
+
+            </div>
+
+            <div class="template-title">
+                Professional
+            </div>
+
+            <a href="{{ url_for('resume.resume_template', template='2') }}"
+               class="select-btn">
+                Select Template →
+            </a>
+
+        </div>
+
+
+        <!-- Template 3 -->
+
+        <div class="template-card">
+
+            <div class="preview template-3">
+
+                <div class="name">
+                    YOUR NAME
+                </div>
+
+                <p>Creative Professional</p>
+
+                <hr>
+
+                <strong>PROFILE</strong>
+
+                <div class="small-line"></div>
+
+                <br>
+
+                <strong>EDUCATION</strong>
+
+                <div class="small-line"></div>
+
+                <strong>PROJECTS</strong>
+
+                <div class="small-line"></div>
+
+            </div>
+
+            <div class="template-title">
+                Minimal
+            </div>
+
+            <a href="{{ url_for('resume.resume_template', template='3') }}"
+               class="select-btn">
+                Select Template →
+            </a>
+
+        </div>
+
+
+        <!-- Template 4 -->
+
+        <div class="template-card">
+
+            <div class="preview template-4">
+
+                <div class="name">
+                    YOUR NAME
+                </div>
+
+                <p>Python Developer</p>
+
+                <strong>PROFILE</strong>
+
+                <div class="small-line"></div>
+
+                <br>
+
+                <strong>EXPERIENCE</strong>
+
+                <div class="fake-line"></div>
+
+                <strong>SKILLS</strong>
+
+                <div class="small-line"></div>
+
+            </div>
+
+            <div class="template-title">
+                Dark Professional
+            </div>
+
+            <a href="{{ url_for('resume.resume_template', template='4') }}"
+               class="select-btn">
+                Select Template →
+            </a>
+
+        </div>
+
+
+        <!-- Template 5 -->
+
+        <div class="template-card">
+
+            <div class="preview template-5">
+
+                <div class="name">
+                    YOUR NAME
+                </div>
+
+                <p>Full Stack Developer</p>
+
+                <strong>ABOUT</strong>
+
+                <div class="small-line"></div>
+
+                <br>
+
+                <strong>EDUCATION</strong>
+
+                <div class="fake-line"></div>
+
+                <strong>PROJECTS</strong>
+
+            </div>
+
+            <div class="template-title">
+                Creative Purple
+            </div>
+
+            <a href="{{ url_for('resume.resume_template', template='5') }}"
+               class="select-btn">
+                Select Template →
+            </a>
+
+        </div>
+
+
+        <!-- Template 6 -->
+
+        <div class="template-card">
+
+            <div class="preview template-6">
+
+                <div class="name">
+                    YOUR NAME
+                </div>
+
+                <p>Professional Profile</p>
+
+                <hr>
+
+                <strong>EXPERIENCE</strong>
+
+                <div class="small-line"></div>
+
+                <strong>EDUCATION</strong>
+
+                <div class="fake-line"></div>
+
+                <strong>SKILLS</strong>
+
+            </div>
+
+            <div class="template-title">
+                Elegant
+            </div>
+
+            <a href="{{ url_for('resume.resume_template', template='6') }}"
+               class="select-btn">
+                Select Template →
+            </a>
+
+        </div>
+
+
+        <!-- Template 7 -->
+
+        <div class="template-card">
+
+            <div class="preview template-7">
+
+                <div class="side"></div>
+
+                <div class="content">
+
+                    <div class="name">
+                        YOUR NAME
+                    </div>
+
+                    <p>Developer</p>
+
+                    <strong>PROFILE</strong>
+
+                    <div class="small-line"></div>
+
+                    <strong>EXPERIENCE</strong>
+
+                    <div class="fake-line"></div>
+
+                </div>
+
+            </div>
+
+            <div class="template-title">
+                Two Column
+            </div>
+
+            <a href="{{ url_for('resume.resume_template', template='7') }}"
+               class="select-btn">
+                Select Template →
+            </a>
+
+        </div>
+
+
+        <!-- Template 8 -->
+
+        <div class="template-card">
+
+            <div class="preview template-8">
+
+                <div class="name">
+                    YOUR NAME
+                </div>
+
+                <p>Software Developer</p>
+
+                <hr>
+
+                <strong>SKILLS</strong>
+
+                <div class="small-line"></div>
+
+                <strong>PROJECTS</strong>
+
+                <div class="fake-line"></div>
+
+                <strong>EDUCATION</strong>
+
+            </div>
+
+            <div class="template-title">
+                ATS Friendly
+            </div>
+
+            <a href="{{ url_for('resume.resume_template', template='8') }}"
+               class="select-btn">
+                Select Template →
+            </a>
+
+        </div>
+
+
+        <!-- Template 9 -->
+
+        <div class="template-card">
+
+            <div class="preview template-9">
+
+                <div class="name">
+                    YOUR NAME
+                </div>
+
+                <p>Creative Developer</p>
+
+                <strong>ABOUT ME</strong>
+
+                <div class="small-line"></div>
+
+                <br>
+
+                <strong>PROJECTS</strong>
+
+                <div class="fake-line"></div>
+
+                <strong>SKILLS</strong>
+
+            </div>
+
+            <div class="template-title">
+                Gradient
+            </div>
+
+            <a href="{{ url_for('resume.resume_template', template='9') }}"
+               class="select-btn">
+                Select Template →
+            </a>
+
+        </div>
+
+
+        <!-- Template 10 -->
+
+        <div class="template-card">
+
+            <div class="preview template-10">
+
+                <div class="name">
+                    YOUR NAME
+                </div>
+
+                <p>Professional Resume</p>
+
+                <hr>
+
+                <strong>PROFILE</strong>
+
+                <div class="small-line"></div>
+
+                <strong>EXPERIENCE</strong>
+
+                <div class="fake-line"></div>
+
+                <strong>EDUCATION</strong>
+
+                <div class="small-line"></div>
+
+            </div>
+
+            
+    <a href="{{ url_for('resume.resume_template', template='11') }}"
+       class="btn btn-primary">
+        Use Template
+    </a>
+</div>
+        <!-- =========================================================
+     TEMPLATE 11 - MINIMALIST PRO
+========================================================= -->
+<div class="template-card">
+    <div class="template-preview">
+
+        <div style="
+            background:#fff;
+            color:#222;
+            width:85%;
+            min-height:260px;
+            margin:auto;
+            padding:20px;
+            text-align:left;
+            border-radius:8px;
+            box-shadow:0 3px 12px rgba(0,0,0,.15);
+        ">
+            <h2 style="margin:0;font-size:20px;">YOUR NAME</h2>
+            <p style="margin:5px 0 15px;color:#777;font-size:11px;">
+                Professional Resume
+            </p>
+
+            <hr>
+
+            <h4>PROFILE</h4>
+            <div style="height:5px;background:#ddd;width:75%;"></div>
+
+            <h4>EXPERIENCE</h4>
+            <div style="height:5px;background:#ddd;width:90%;"></div>
+
+            <h4>EDUCATION</h4>
+            <div style="height:5px;background:#ddd;width:65%;"></div>
+        </div>
+
+    </div>
+
+    <h3>Minimalist Pro</h3>
+    <p>Clean & Modern</p>
+
+    <a href="{{ url_for('resume.resume_template', template='11') }}"
+       class="btn btn-primary">
+        Use Template
+    </a>
+</div>
+
+
+<!-- =========================================================
+     TEMPLATE 12 - TECH PROFESSIONAL
+========================================================= -->
+<div class="template-card">
+    <div class="template-preview">
+
+        <div style="
+            background:#111827;
+            color:white;
+            width:85%;
+            min-height:260px;
+            margin:auto;
+            padding:20px;
+            text-align:left;
+            border-radius:8px;
+        ">
+            <h2 style="color:#38bdf8;margin:0;">YOUR NAME</h2>
+
+            <p style="font-size:10px;color:#aaa;">
+                Python Developer | AI Enthusiast
+            </p>
+
+            <hr style="border-color:#374151;">
+
+            <h4 style="color:#38bdf8;">ABOUT ME</h4>
+            <div style="height:5px;background:#374151;width:85%;"></div>
+
+            <h4 style="color:#38bdf8;">TECHNICAL SKILLS</h4>
+            <div style="height:5px;background:#374151;width:70%;"></div>
+
+            <h4 style="color:#38bdf8;">PROJECTS</h4>
+            <div style="height:5px;background:#374151;width:90%;"></div>
+        </div>
+
+    </div>
+
+    <h3>Tech Professional</h3>
+    <p>Developer Style</p>
+
+    <a href="{{ url_for('resume.resume_template', template='12') }}"
+       class="btn btn-primary">
+        Use Template
+    </a>
+</div>
+
+
+<!-- =========================================================
+     TEMPLATE 13 - BLUE EXECUTIVE
+========================================================= -->
+<div class="template-card">
+    <div class="template-preview">
+
+        <div style="
+            background:white;
+            width:85%;
+            min-height:260px;
+            margin:auto;
+            text-align:left;
+            border-radius:8px;
+            overflow:hidden;
+        ">
+            <div style="
+                background:#2563eb;
+                color:white;
+                padding:18px;
+            ">
+                <h2 style="margin:0;">YOUR NAME</h2>
+                <p style="margin:5px 0;">Executive Professional</p>
+            </div>
+
+            <div style="padding:15px;color:#222;">
+                <h4>PROFILE</h4>
+                <div style="height:5px;background:#ddd;width:85%;"></div>
+
+                <h4>EXPERIENCE</h4>
+                <div style="height:5px;background:#ddd;width:70%;"></div>
+
+                <h4>EDUCATION</h4>
+                <div style="height:5px;background:#ddd;width:80%;"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <h3>Blue Executive</h3>
+    <p>Professional & Modern</p>
+
+    <a href="{{ url_for('resume.resume_template', template='13') }}"
+       class="btn btn-primary">
+        Use Template
+    </a>
+</div>
+
+
+<!-- =========================================================
+     TEMPLATE 14 - CLEAN BUSINESS
+========================================================= -->
+<div class="template-card">
+    <div class="template-preview">
+
+        <div style="
+            background:#fff;
+            color:#222;
+            width:85%;
+            min-height:260px;
+            margin:auto;
+            padding:20px;
+            text-align:left;
+            border-radius:8px;
+        ">
+            <h2 style="margin:0;">YOUR NAME</h2>
+            <p style="color:#666;">Business Professional</p>
+
+            <div style="
+                width:100%;
+                height:3px;
+                background:#222;
+                margin:15px 0;
+            "></div>
+
+            <h4>SUMMARY</h4>
+            <div style="height:5px;background:#ddd;width:90%;"></div>
+
+            <h4>WORK EXPERIENCE</h4>
+            <div style="height:5px;background:#ddd;width:75%;"></div>
+
+            <h4>EDUCATION</h4>
+            <div style="height:5px;background:#ddd;width:65%;"></div>
+        </div>
+
+    </div>
+
+    <h3>Clean Business</h3>
+    <p>Simple Business Resume</p>
+
+    <a href="{{ url_for('resume.resume_template', template='14') }}"
+       class="btn btn-primary">
+        Use Template
+    </a>
+</div>
+
+
+<!-- =========================================================
+     TEMPLATE 15 - DARK MODERN
+========================================================= -->
+<div class="template-card">
+    <div class="template-preview">
+
+        <div style="
+            background:#18181b;
+            color:white;
+            width:85%;
+            min-height:260px;
+            margin:auto;
+            padding:20px;
+            text-align:left;
+            border-radius:8px;
+        ">
+            <h2 style="margin:0;color:#a78bfa;">YOUR NAME</h2>
+            <p style="color:#aaa;">Modern Professional</p>
+
+            <hr style="border-color:#444;">
+
+            <h4 style="color:#a78bfa;">PROFILE</h4>
+            <div style="height:5px;background:#444;width:80%;"></div>
+
+            <h4 style="color:#a78bfa;">EXPERIENCE</h4>
+            <div style="height:5px;background:#444;width:90%;"></div>
+
+            <h4 style="color:#a78bfa;">SKILLS</h4>
+            <div style="height:5px;background:#444;width:70%;"></div>
+        </div>
+
+    </div>
+
+    <h3>Dark Modern</h3>
+    <p>Modern Dark Resume</p>
+
+    <a href="{{ url_for('resume.resume_template', template='15') }}"
+       class="btn btn-primary">
+        Use Template
+    </a>
+</div>
+
+
+<!-- =========================================================
+     TEMPLATE 16 - SIMPLE ACADEMIC
+========================================================= -->
+<div class="template-card">
+    <div class="template-preview">
+
+        <div style="
+            background:#fff;
+            color:#222;
+            width:85%;
+            min-height:260px;
+            margin:auto;
+            padding:20px;
+            text-align:left;
+            border-radius:8px;
+        ">
+            <h2 style="
+                text-align:center;
+                margin:0;
+            ">
+                YOUR NAME
+            </h2>
+
+            <p style="
+                text-align:center;
+                color:#777;
+                font-size:10px;
+            ">
+                Academic Resume
+            </p>
+
+            <hr>
+
+            <h4>EDUCATION</h4>
+            <div style="height:5px;background:#ddd;width:90%;"></div>
+
+            <h4>RESEARCH</h4>
+            <div style="height:5px;background:#ddd;width:75%;"></div>
+
+            <h4>SKILLS</h4>
+            <div style="height:5px;background:#ddd;width:65%;"></div>
+        </div>
+
+    </div>
+
+    <h3>Simple Academic</h3>
+    <p>Academic & Formal</p>
+
+    <a href="{{ url_for('resume.resume_template', template='16') }}"
+       class="btn btn-primary">
+        Use Template
+    </a>
+</div>
+
+
+<!-- =========================================================
+     TEMPLATE 17 - TIMELINE PROFESSIONAL
+========================================================= -->
+<div class="template-card">
+    <div class="template-preview">
+
+        <div style="
+            background:#fff;
+            color:#222;
+            width:85%;
+            min-height:260px;
+            margin:auto;
+            padding:20px;
+            text-align:left;
+            border-radius:8px;
+        ">
+            <h2 style="color:#2563eb;margin:0;">
+                YOUR NAME
+            </h2>
+
+            <p style="color:#777;">
+                Professional Resume
+            </p>
+
+            <div style="
+                border-left:3px solid #2563eb;
+                padding-left:12px;
+            ">
+                <h4>EXPERIENCE</h4>
+                <div style="height:5px;background:#ddd;width:85%;"></div>
+
+                <h4>EDUCATION</h4>
+                <div style="height:5px;background:#ddd;width:75%;"></div>
+
+                <h4>PROJECTS</h4>
+                <div style="height:5px;background:#ddd;width:90%;"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <h3>Timeline Professional</h3>
+    <p>Timeline Resume</p>
+
+    <a href="{{ url_for('resume.resume_template', template='17') }}"
+       class="btn btn-primary">
+        Use Template
+    </a>
+</div>
+
+
+<!-- =========================================================
+     TEMPLATE 18 - FORMAL ATS
+========================================================= -->
+<div class="template-card">
+    <div class="template-preview">
+
+        <div style="
+            background:white;
+            color:#111;
+            width:85%;
+            min-height:260px;
+            margin:auto;
+            padding:20px;
+            text-align:left;
+            border-radius:8px;
+        ">
+            <h2 style="
+                text-align:center;
+                margin:0;
+            ">
+                YOUR NAME
+            </h2>
+
+            <p style="
+                text-align:center;
+                font-size:10px;
+                color:#555;
+            ">
+                Software Professional
+            </p>
+
+            <hr>
+
+            <h4>SUMMARY</h4>
+            <div style="height:5px;background:#ddd;width:95%;"></div>
+
+            <h4>EXPERIENCE</h4>
+            <div style="height:5px;background:#ddd;width:85%;"></div>
+
+            <h4>EDUCATION</h4>
+            <div style="height:5px;background:#ddd;width:70%;"></div>
+        </div>
+
+    </div>
+
+    <h3>Formal ATS</h3>
+    <p>ATS Friendly</p>
+
+    <a href="{{ url_for('resume.resume_template', template='18') }}"
+       class="btn btn-primary">
+        Use Template
+    </a>
+</div>
+
+
+<!-- =========================================================
+     TEMPLATE 19 - CREATIVE SIDEBAR
+========================================================= -->
+<div class="template-card">
+    <div class="template-preview">
+
+        <div style="
+            background:#fff;
+            color:#222;
+            width:85%;
+            min-height:260px;
+            margin:auto;
+            display:flex;
+            text-align:left;
+            border-radius:8px;
+            overflow:hidden;
+        ">
+
+            <div style="
+                width:32%;
+                background:#7c3aed;
+                color:white;
+                padding:15px;
+            ">
+                <h3>NAME</h3>
+                <p style="font-size:9px;">PROFILE</p>
+                <p style="font-size:9px;">SKILLS</p>
+                <p style="font-size:9px;">CONTACT</p>
+            </div>
+
+            <div style="
+                width:68%;
+                padding:15px;
+            ">
+                <h4>EXPERIENCE</h4>
+                <div style="height:5px;background:#ddd;width:90%;"></div>
+
+                <h4>PROJECTS</h4>
+                <div style="height:5px;background:#ddd;width:75%;"></div>
+
+                <h4>EDUCATION</h4>
+                <div style="height:5px;background:#ddd;width:85%;"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <h3>Creative Sidebar</h3>
+    <p>Creative Resume</p>
+
+    <a href="{{ url_for('resume.resume_template', template='19') }}"
+       class="btn btn-primary">
+        Use Template
+    </a>
+</div>
+
+
+<!-- =========================================================
+     TEMPLATE 20 - PROFESSIONAL CLASSIC
+========================================================= -->
+<div class="template-card">
+    <div class="template-preview">
+
+        <div style="
+            background:#fff;
+            color:#222;
+            width:85%;
+            min-height:260px;
+            margin:auto;
+            padding:20px;
+            text-align:left;
+            border-radius:8px;
+        ">
+            <h2 style="margin:0;">
+                YOUR NAME
+            </h2>
+
+            <p style="color:#777;">
+                Professional Resume
+            </p>
+
+            <div style="
+                height:2px;
+                background:#222;
+                margin:15px 0;
+            "></div>
+
+            <h4>CAREER OBJECTIVE</h4>
+            <div style="height:5px;background:#ddd;width:90%;"></div>
+
+            <h4>EXPERIENCE</h4>
+            <div style="height:5px;background:#ddd;width:80%;"></div>
+
+            <h4>EDUCATION</h4>
+            <div style="height:5px;background:#ddd;width:70%;"></div>
+        </div>
+
+    </div>
+
+    <h3>Professional Classic</h3>
+    <p>Classic Professional</p>
+
+    <a href="{{ url_for('resume.resume_template', template='20') }}"
+       class="btn btn-primary">
+        Use Template
+    </a>
+</div>
+
+
+<!-- =========================================================
+     TEMPLATE 21 - DEVELOPER RESUME
+========================================================= -->
+<div class="template-card">
+    <div class="template-preview">
+
+        <div style="
+            background:#0f172a;
+            color:white;
+            width:85%;
+            min-height:260px;
+            margin:auto;
+            padding:20px;
+            text-align:left;
+            border-radius:8px;
+        ">
+            <h2 style="margin:0;color:#22c55e;">
+                YOUR NAME
+            </h2>
+
+            <p style="color:#94a3b8;">
+                &lt; Python Developer /&gt;
+            </p>
+
+            <hr style="border-color:#334155;">
+
+            <h4 style="color:#22c55e;">
+                $ SKILLS
+            </h4>
+            <div style="height:5px;background:#334155;width:85%;"></div>
+
+            <h4 style="color:#22c55e;">
+                $ PROJECTS
+            </h4>
+            <div style="height:5px;background:#334155;width:75%;"></div>
+
+            <h4 style="color:#22c55e;">
+                $ EXPERIENCE
+            </h4>
+            <div style="height:5px;background:#334155;width:90%;"></div>
+        </div>
+
+    </div>
+
+    <h3>Developer Resume</h3>
+    <p>For Developers</p>
+
+    <a href="{{ url_for('resume.resume_template', template='21') }}"
+       class="btn btn-primary">
+        Use Template
+    </a>
+</div>
+
+
+<!-- =========================================================
+     TEMPLATE 22 - CORPORATE MINIMAL
+========================================================= -->
+<div class="template-card">
+    <div class="template-preview">
+
+        <div style="
+            background:#fff;
+            color:#222;
+            width:85%;
+            min-height:260px;
+            margin:auto;
+            padding:20px;
+            text-align:left;
+            border-radius:8px;
+        ">
+            <h2 style="
+                text-align:center;
+                margin:0;
+            ">
+                YOUR NAME
+            </h2>
+
+            <p style="
+                text-align:center;
+                color:#666;
+                font-size:10px;
+            ">
+                Corporate Professional
+            </p>
+
+            <div style="
+                width:40%;
+                height:3px;
+                background:#111;
+                margin:15px auto;
+            "></div>
+
+            <h4>PROFILE</h4>
+            <div style="height:5px;background:#ddd;width:80%;"></div>
+
+            <h4>WORK HISTORY</h4>
+            <div style="height:5px;background:#ddd;width:90%;"></div>
+
+            <h4>QUALIFICATIONS</h4>
+            <div style="height:5px;background:#ddd;width:70%;"></div>
+        </div>
+
+    </div>
+
+    <h3>Corporate Minimal</h3>
+    <p>Corporate & Clean</p>
+
+    <a href="{{ url_for('resume.resume_template', template='22') }}"
+       class="btn btn-primary">
+        Use Template
+    </a>
+</div>
+
+
+<!-- =========================================================
+     TEMPLATE 23 - ELEGANT MODERN
+========================================================= -->
+<div class="template-card">
+    <div class="template-preview">
+
+        <div style="
+            background:#fff;
+            color:#333;
+            width:85%;
+            min-height:260px;
+            margin:auto;
+            padding:20px;
+            text-align:left;
+            border-radius:8px;
+        ">
+            <h2 style="
+                text-align:center;
+                color:#be185d;
+                margin:0;
+            ">
+                YOUR NAME
+            </h2>
+
+            <p style="
+                text-align:center;
+                color:#888;
+                font-size:10px;
+            ">
+                Creative Professional
+            </p>
+
+            <hr>
+
+            <h4 style="color:#be185d;">ABOUT</h4>
+            <div style="height:5px;background:#eee;width:85%;"></div>
+
+            <h4 style="color:#be185d;">EXPERIENCE</h4>
+            <div style="height:5px;background:#eee;width:75%;"></div>
+
+            <h4 style="color:#be185d;">EDUCATION</h4>
+            <div style="height:5px;background:#eee;width:90%;"></div>
+        </div>
+
+    </div>
+
+    <h3>Elegant Modern</h3>
+    <p>Elegant & Stylish</p>
+
+    <a href="{{ url_for('resume.resume_template', template='23') }}"
+       class="btn btn-primary">
+        Use Template
+    </a>
+</div>
+
+
+<!-- =========================================================
+     TEMPLATE 24 - JOB READY ATS
+========================================================= -->
+<div class="template-card">
+    <div class="template-preview">
+
+        <div style="
+            background:#fff;
+            color:#222;
+            width:85%;
+            min-height:260px;
+            margin:auto;
+            padding:20px;
+            text-align:left;
+            border-radius:8px;
+        ">
+            <h2 style="margin:0;">
+                YOUR NAME
+            </h2>
+
+            <p style="font-size:10px;color:#666;">
+                Job Candidate
+            </p>
+
+            <hr>
+
+            <h4>PROFESSIONAL SUMMARY</h4>
+            <div style="height:5px;background:#ddd;width:95%;"></div>
+
+            <h4>KEY SKILLS</h4>
+            <div style="height:5px;background:#ddd;width:80%;"></div>
+
+            <h4>EXPERIENCE</h4>
+            <div style="height:5px;background:#ddd;width:90%;"></div>
+
+            <h4>EDUCATION</h4>
+            <div style="height:5px;background:#ddd;width:70%;"></div>
+        </div>
+
+    </div>
+
+    <h3>Job Ready ATS</h3>
+    <p>Simple & ATS Friendly</p>
+
+    <a href="{{ url_for('resume.resume_template', template='24') }}"
+       class="btn btn-primary">
+        Use Template
+    </a>
+</div>
+
+
+<!-- =========================================================
+     TEMPLATE 25 - PREMIUM EXECUTIVE
+========================================================= -->
+<div class="template-card">
+    <div class="template-preview">
+
+        <div style="
+            background:#fff;
+            color:#222;
+            width:85%;
+            min-height:260px;
+            margin:auto;
+            text-align:left;
+            border-radius:8px;
+            overflow:hidden;
+        ">
+
+            <div style="
+                background:#111827;
+                color:white;
+                padding:20px;
+            ">
+                <h2 style="margin:0;">
+                    YOUR NAME
+                </h2>
+
+                <p style="
+                    margin:5px 0 0;
+                    color:#d1d5db;
+                    font-size:10px;
+                ">
+                    Executive Professional
+                </p>
+            </div>
+
+            <div style="padding:15px;">
+
+                <h4>PROFILE</h4>
+                <div style="
+                    height:5px;
+                    background:#ddd;
+                    width:85%;
+                "></div>
+
+                <h4>EXPERIENCE</h4>
+                <div style="
+                    height:5px;
+                    background:#ddd;
+                    width:90%;
+                "></div>
+
+                <h4>EDUCATION</h4>
+                <div style="
+                    height:5px;
+                    background:#ddd;
+                    width:75%;
+                "></div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <h3>Premium Executive</h3>
+    <p>Premium Professional</p>
+
+    <a href="{{ url_for('resume.resume_template', template='25') }}"
+       class="btn btn-primary">
+        Use Template
+    </a>
+</div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

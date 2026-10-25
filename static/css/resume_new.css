@@ -1,0 +1,343 @@
+/* Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:#eef2f7;
+    padding:40px;
+}
+
+.resume{
+
+    width:1100px;
+
+    margin:auto;
+
+    display:flex;
+
+    background:#fff;
+
+    border-radius:18px;
+
+    overflow:hidden;
+
+    box-shadow:0 15px 40px rgba(0,0,0,.15);
+
+}
+
+.sidebar{
+
+    width:32%;
+
+    background:#1e3a8a;
+
+    color:#fff;
+
+    padding:35px;
+
+}
+
+.profile{
+
+    text-align:center;
+
+}
+
+.profile-img{
+
+    width:170px;
+
+    height:170px;
+
+    border-radius:50%;
+
+    object-fit:cover;
+
+    border:6px solid white;
+
+    margin-bottom:18px;
+
+}
+
+.profile h2{
+
+    font-size:28px;
+
+    font-weight:700;
+
+}
+
+.profile p{
+
+    color:#dbeafe;
+
+    margin-top:8px;
+
+}
+
+.sidebar hr{
+
+    border:1px solid rgba(255,255,255,.2);
+
+    margin:30px 0;
+
+}
+
+.sidebar h4{
+
+    margin-bottom:18px;
+
+    text-transform:uppercase;
+
+    letter-spacing:1px;
+
+}
+
+.contact p{
+
+    margin-bottom:12px;
+
+    font-size:15px;
+
+}
+
+.contact i{
+
+    margin-right:10px;
+
+}
+
+.skill{
+
+    background:#2563eb;
+
+    padding:10px 15px;
+
+    border-radius:30px;
+
+    display:inline-block;
+
+    margin:6px;
+
+    font-size:14px;
+
+}
+/* ==========================
+   Main Content
+========================== */
+
+.content{
+
+    width:68%;
+
+    padding:45px;
+
+    background:#ffffff;
+
+}
+
+.content section{
+
+    margin-bottom:35px;
+
+}
+
+.content h2{
+
+    color:#1e3a8a;
+
+    font-size:24px;
+
+    margin-bottom:18px;
+
+    border-left:5px solid #2563eb;
+
+    padding-left:12px;
+
+}
+
+.content p{
+
+    color:#444;
+
+    line-height:1.8;
+
+    font-size:15px;
+
+}
+
+/* ==========================
+   Cards
+========================== */
+
+.resume-card{
+
+    background:#f8fafc;
+
+    border-left:5px solid #2563eb;
+
+    padding:18px;
+
+    border-radius:12px;
+
+    margin-bottom:20px;
+
+    box-shadow:0 5px 12px rgba(0,0,0,.08);
+
+    transition:.3s;
+
+}
+
+.resume-card:hover{
+
+    transform:translateY(-4px);
+
+    box-shadow:0 10px 20px rgba(0,0,0,.12);
+
+}
+
+.resume-card h4{
+
+    color:#1e3a8a;
+
+    margin-bottom:6px;
+
+}
+
+.resume-card h6{
+
+    color:#555;
+
+    margin-bottom:8px;
+
+}
+
+.resume-card span{
+
+    color:#2563eb;
+
+    font-weight:600;
+
+}
+
+/* ==========================
+   Certificate List
+========================== */
+
+.certificate-list{
+
+    list-style:none;
+
+    padding:0;
+
+}
+
+.certificate-list li{
+
+    margin-bottom:12px;
+
+}
+
+.certificate-list a{
+
+    display:inline-block;
+
+    text-decoration:none;
+
+    color:white;
+
+    background:#2563eb;
+
+    padding:10px 18px;
+
+    border-radius:8px;
+
+    transition:.3s;
+
+}
+
+.certificate-list a:hover{
+
+    background:#1e40af;
+
+}
+
+/* ==========================
+   Project Link
+========================== */
+
+.resume-card a{
+
+    color:#2563eb;
+
+    text-decoration:none;
+
+    font-weight:600;
+
+}
+
+.resume-card a:hover{
+
+    text-decoration:underline;
+
+}
+
+/* ==========================
+   Responsive
+========================== */
+
+@media(max-width:992px){
+
+.resume{
+
+    flex-direction:column;
+
+    width:100%;
+
+}
+
+.sidebar{
+
+    width:100%;
+
+}
+
+.content{
+
+    width:100%;
+
+}
+
+}
+
+/* ==========================
+   Print (A4)
+========================== */
+
+@media print{
+
+body{
+
+    background:white;
+
+    padding:0;
+
+}
+
+.resume{
+
+    width:100%;
+
+    box-shadow:none;
+
+    border-radius:0;
+
+}
+
+}

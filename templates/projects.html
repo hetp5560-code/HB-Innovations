@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Projects | HB Innovations</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Common CSS -->
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/common.css') }}">
+
+    <!-- Projects CSS -->
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/projects.css') }}">
+
+</head>
+
+<body>
+
+<div class="stepper">
+
+    <div class="step active">1<span>Profile</span></div>
+
+    <div class="line"></div>
+
+    <div class="step active">2<span>Education</span></div>
+
+    <div class="line"></div>
+
+    <div class="step active">3<span>Experience</span></div>
+
+    <div class="line"></div>
+
+    <div class="step active">4<span>Skills</span></div>
+
+    <div class="line"></div>
+
+    <div class="step active">5<span>Projects</span></div>
+
+    <div class="line"></div>
+
+    <div class="step">6<span>Certificates</span></div>
+
+    <div class="line"></div>
+
+    <div class="step">7<span>Resume</span></div>
+
+</div>
+
+<div class="container py-5">
+
+    <div class="projects-card">
+
+        <h2 class="text-center mb-4">
+            📂 Project Details
+        </h2>
+
+        <form method="POST">
+
+            <div class="mb-3">
+
+                <label>Project Name</label>
+
+                <input
+                    type="text"
+                    name="project_name"
+                    class="form-control"
+                    value="{{ project.project_name if project else '' }}"
+                    required>
+
+            </div>
+
+            <div class="mb-3">
+
+                <label>Description</label>
+
+                <textarea
+                    name="description"
+                    rows="5"
+                    class="form-control">{{ project.description if project else '' }}</textarea>
+
+            </div>
+
+            <div class="mb-3">
+
+                <label>GitHub Link</label>
+
+                <input
+                    type="url"
+                    name="github_link"
+                    class="form-control"
+                    value="{{ project.github_link if project else '' }}">
+
+            </div>
+
+            <button class="btn btn-primary w-100" type="submit">
+                Save & Continue
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+</html>

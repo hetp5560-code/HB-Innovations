@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{{ category|title }} Birthday Templates | HB Innovations</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: #f5f7fb;
+            color: #222;
+        }
+
+        .page {
+            padding: 35px;
+        }
+
+        /* Top */
+
+        .topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 35px;
+        }
+
+        .topbar h2 {
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .topbar p {
+            margin: 0;
+            color: #777;
+        }
+
+        .back-btn {
+            text-decoration: none;
+            background: #2563eb;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 10px;
+        }
+
+        /* Heading */
+
+        .heading {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .heading h1 {
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .heading p {
+            color: #777;
+        }
+
+        .category-badge {
+            display: inline-block;
+            padding: 7px 18px;
+            border-radius: 30px;
+            background: white;
+            box-shadow: 0 5px 20px rgba(0,0,0,.08);
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+
+        /* Template Grid */
+
+        .template-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 25px;
+        }
+
+        .template-card {
+            background: white;
+            padding: 12px;
+            border-radius: 18px;
+            box-shadow: 0 8px 25px rgba(0,0,0,.08);
+            transition: .3s;
+        }
+
+        .template-card:hover {
+            transform: translateY(-7px);
+            box-shadow: 0 15px 35px rgba(0,0,0,.14);
+        }
+
+        /* Birthday Preview */
+
+        .birthday-preview {
+            height: 330px;
+            border-radius: 14px;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .photo-frame {
+            width: 105px;
+            height: 105px;
+            background: rgba(255,255,255,.85);
+            border: 5px solid white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 38px;
+            margin-bottom: 15px;
+            overflow: hidden;
+        }
+
+        .photo-frame.circle {
+            border-radius: 50%;
+        }
+
+        .photo-frame.round {
+            border-radius: 20px;
+        }
+
+        .photo-frame.square {
+            border-radius: 8px;
+        }
+
+        .birthday-preview h3 {
+            font-size: 20px;
+            font-weight: 700;
+            margin: 5px 0;
+        }
+
+        .birthday-preview p {
+            font-size: 12px;
+            margin: 5px 0;
+            max-width: 190px;
+        }
+
+        .age {
+            font-size: 30px;
+            font-weight: 800;
+        }
+
+        .decoration {
+            position: absolute;
+            font-size: 28px;
+        }
+
+        .d1 {
+            top: 10px;
+            left: 12px;
+        }
+
+        .d2 {
+            top: 10px;
+            right: 12px;
+        }
+
+        .d3 {
+            bottom: 10px;
+            left: 12px;
+        }
+
+        .d4 {
+            bottom: 10px;
+            right: 12px;
+        }
+
+        /* Template Names */
+
+        .template-info {
+            padding: 12px 5px 5px;
+        }
+
+        .template-info h5 {
+            margin: 0;
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .template-info p {
+            margin: 3px 0 10px;
+            font-size: 12px;
+            color: #777;
+        }
+
+        .select-btn {
+            width: 100%;
+            border: none;
+            background: #2563eb;
+            color: white;
+            padding: 9px;
+            border-radius: 9px;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+        }
+
+        .select-btn:hover {
+            background: #1d4ed8;
+        }
+
+
+        /* =================================================
+           25 DIFFERENT TEMPLATE STYLES
+        ================================================= */
+
+        .style-1 {
+            background: linear-gradient(135deg, #ffd6e8, #fff1f7);
+        }
+
+        .style-2 {
+            background: linear-gradient(135deg, #dbeafe, #eff6ff);
+        }
+
+        .style-3 {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+        }
+
+        .style-4 {
+            background: linear-gradient(135deg, #ede9fe, #ddd6fe);
+        }
+
+        .style-5 {
+            background: linear-gradient(135deg, #fce7f3, #fbcfe8);
+        }
+
+        .style-6 {
+            background: linear-gradient(135deg, #cffafe, #a5f3fc);
+        }
+
+        .style-7 {
+            background: linear-gradient(135deg, #dcfce7, #bbf7d0);
+        }
+
+        .style-8 {
+            background: linear-gradient(135deg, #ffedd5, #fed7aa);
+        }
+
+        .style-9 {
+            background: linear-gradient(135deg, #e0e7ff, #c7d2fe);
+        }
+
+        .style-10 {
+            background: linear-gradient(135deg, #f5d0fe, #e879f9);
+        }
+
+        .style-11 {
+            background: linear-gradient(135deg, #fef9c3, #fde047);
+        }
+
+        .style-12 {
+            background: linear-gradient(135deg, #bae6fd, #7dd3fc);
+        }
+
+        .style-13 {
+            background: linear-gradient(135deg, #fecdd3, #fda4af);
+        }
+
+        .style-14 {
+            background: linear-gradient(135deg, #ddd6fe, #a78bfa);
+        }
+
+        .style-15 {
+            background: linear-gradient(135deg, #d1fae5, #6ee7b7);
+        }
+
+        .style-16 {
+            background: linear-gradient(135deg, #fed7aa, #fb923c);
+        }
+
+        .style-17 {
+            background: linear-gradient(135deg, #bfdbfe, #60a5fa);
+        }
+
+        .style-18 {
+            background: linear-gradient(135deg, #fbcfe8, #f472b6);
+        }
+
+        .style-19 {
+            background: linear-gradient(135deg, #e9d5ff, #c084fc);
+        }
+
+        .style-20 {
+            background: linear-gradient(135deg, #ccfbf1, #5eead4);
+        }
+
+        .style-21 {
+            background: linear-gradient(135deg, #fee2e2, #f87171);
+        }
+
+        .style-22 {
+            background: linear-gradient(135deg, #dbeafe, #818cf8);
+        }
+
+        .style-23 {
+            background: linear-gradient(135deg, #fef3c7, #fb7185);
+        }
+
+        .style-24 {
+            background: linear-gradient(135deg, #e0f2fe, #38bdf8);
+        }
+
+        .style-25 {
+            background: linear-gradient(135deg, #fae8ff, #d946ef);
+        }
+
+
+        /* Mobile */
+
+        @media(max-width:1200px) {
+
+            .template-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+
+        }
+
+        @media(max-width:992px) {
+
+            .template-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+        }
+
+        @media(max-width:768px) {
+
+            .page {
+                padding: 20px;
+            }
+
+            .topbar {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 20px;
+            }
+
+            .template-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+        }
+
+        @media(max-width:500px) {
+
+            .template-grid {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+<div class="page">
+
+    <!-- TOP BAR -->
+
+    <div class="topbar">
+
+        <div>
+
+            <h2>🎂 Birthday Templates</h2>
+
+            <p>
+                Choose a beautiful birthday design.
+            </p>
+
+        </div>
+
+        <a href="/birthday" class="back-btn">
+
+            <i class="bi bi-arrow-left"></i>
+
+            Back
+
+        </a>
+
+    </div>
+
+
+    <!-- HEADING -->
+
+    <div class="heading">
+
+        <div class="category-badge">
+
+            {% if category == "girl" %}
+                👧 Girl Birthday
+            {% else %}
+                👦 Boy Birthday
+            {% endif %}
+
+        </div>
+
+        <h1>
+            Choose Your Birthday Template
+        </h1>
+
+        <p>
+            Select any template and add your photo, name and age.
+        </p>
+
+    </div>
+
+
+    <!-- TEMPLATE GRID -->
+
+    <div class="template-grid">
+
+
+        {% set wishes = [
+
+        "Happy Birthday! May your day be filled with love, smiles and beautiful memories. 💖",
+
+        "Wishing you a wonderful birthday filled with happiness and endless joy! 🎉",
+
+        "Another year of beautiful moments. Keep smiling and keep shining! ✨",
+
+        "May all your dreams come true and your birthday be truly special! 🎂",
+
+        "Sending lots of love, happiness and warm wishes on your special day! 💕",
+
+        "Celebrate today, smile always and enjoy every beautiful moment! 🥳",
+
+        "May your special day bring endless happiness and unforgettable memories! 🌸",
+
+        "Happy Birthday! Keep shining brighter every single day! ⭐",
+
+        "Wishing you laughter, love and happiness today and always! 🎈",
+
+        "Have a magical birthday filled with wonderful surprises! 🪄",
+
+        "Cheers to another beautiful year of life and happiness! 🥂",
+
+        "May your birthday be as amazing and special as you are! 💫",
+
+        "Keep smiling, keep dreaming and keep making beautiful memories! ❤️",
+
+        "Today is your day. Celebrate, enjoy and shine! 🎊",
+
+        "Wishing you a year full of success, happiness and beautiful moments! 🌟",
+
+        "May every moment of your birthday bring a reason to smile! 😊",
+
+        "Happy Birthday! Make today unforgettable! 🎁",
+
+        "Sending you birthday wishes filled with love, laughter and joy! 💝",
+
+        "May this new year of your life be full of amazing adventures! ✨",
+
+        "Dance, laugh, celebrate and enjoy your special day! 🎉",
+
+        "A beautiful day for a beautiful celebration. Happy Birthday! 🎂",
+
+        "May happiness follow you wherever you go. Happy Birthday! 💙",
+
+        "Your special day deserves special memories. Have a fantastic birthday! 📸",
+
+        "Wishing you countless reasons to smile in the coming year! 🌈",
+
+        "Happy Birthday! Here's to another amazing chapter of your life! 👑"
+
+        ] %}
+
+
+        {% for i in range(1, 26) %}
+
+        <div class="template-card">
+
+
+            <div class="birthday-preview style-{{ i }}">
+
+                <span class="decoration d1">🎈</span>
+                <span class="decoration d2">✨</span>
+
+                <span class="decoration d3">🎉</span>
+                <span class="decoration d4">🎂</span>
+
+
+                <!-- Photo Placeholder -->
+
+                <div class="photo-frame
+                    {% if i % 3 == 0 %}
+                        circle
+                    {% elif i % 2 == 0 %}
+                        round
+                    {% else %}
+                        square
+                    {% endif %}">
+
+                    📷
+
+                </div>
+
+
+                <div class="age">
+                    {{ i }}
+                </div>
+
+
+                <h3>
+                    {% if category == "girl" %}
+                        Birthday Princess
+                    {% else %}
+                        Birthday Champ
+                    {% endif %}
+                </h3>
+
+
+                <p>
+                    {{ wishes[i-1] }}
+                </p>
+
+
+            </div>
+
+
+            <div class="template-info">
+
+                <h5>
+                    Template {{ i }}
+                </h5>
+
+                <p>
+                    {% if category == "girl" %}
+                        Girl Birthday Design
+                    {% else %}
+                        Boy Birthday Design
+                    {% endif %}
+                </p>
+
+
+                <button
+                    class="select-btn"
+                    onclick="selectTemplate('{{ category }}', '{{ i }}')">
+
+                    <i class="bi bi-check-circle"></i>
+
+                    Select Template
+
+                </button>
+
+            </div>
+
+
+        </div>
+
+        {% endfor %}
+
+
+    </div>
+
+</div>
+
+
+<script>
+
+function selectTemplate(category, template) {
+
+    localStorage.setItem("birthdayCategory", category);
+    localStorage.setItem("birthdayTemplate", template);
+
+    window.location.href =
+        "/birthday/editor?category=" +
+        encodeURIComponent(category) +
+        "&template=" +
+        encodeURIComponent(template);
+}
+
+</script>
+
+</body>
+
+</html>

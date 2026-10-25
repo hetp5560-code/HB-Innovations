@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Education | HB Innovations</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
+    <link rel="stylesheet"
+      href="{{ url_for('static', filename='css/common.css') }}">
+    <!-- Education CSS -->
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/education.css') }}">
+
+</head>
+
+<body>
+<div class="stepper">
+
+    <div class="step active">
+        1
+        <span>Profile</span>
+    </div>
+
+    <div class="line"></div>
+
+    <div class="step active">
+        2
+        <span>Education</span>
+    </div>
+
+    <div class="line"></div>
+
+    <div class="step">
+        3
+        <span>Experience</span>
+    </div>
+
+    <div class="line"></div>
+
+    <div class="step">
+        4
+        <span>Skills</span>
+    </div>
+
+    <div class="line"></div>
+
+    <div class="step">
+        5
+        <span>Projects</span>
+    </div>
+
+    <div class="line"></div>
+
+    <div class="step">
+        6
+        <span>Certificates</span>
+    </div>
+
+    <div class="line"></div>
+
+    <div class="step">
+        7
+        <span>Resume</span>
+    </div>
+
+</div>
+<div class="container py-5">
+
+    <div class="education-card">
+
+        <h2 class="text-center mb-4">
+            🎓 Education Details
+        </h2>
+
+        <form method="POST">
+
+            <div class="mb-3">
+
+                <label>Degree</label>
+
+                <input
+    type="text"
+    name="degree"
+    class="form-control"
+    value="{{ education.degree if education else '' }}"
+    required>
+
+            </div>
+
+            <div class="mb-3">
+
+                <label>Institute / College</label>
+
+                <input
+    type="text"
+    name="institute"
+    class="form-control"
+    value="{{ education.institute if education else '' }}"
+    required>
+
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-6 mb-3">
+
+                    <label>Passing Year</label>
+
+                    <input
+    type="text"
+    name="passing_year"
+    class="form-control"
+    value="{{ education.passing_year if education else '' }}">
+
+                </div>
+
+                <div class="col-md-6 mb-3">
+
+                    <label>CGPA / Percentage</label>
+
+                    <input
+    type="text"
+    name="cgpa"
+    class="form-control"
+    value="{{ education.cgpa if education else '' }}">
+
+                </div>
+
+            </div>
+
+            <button class="btn btn-success w-100" type="submit">
+                Save & Continue
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+</html>

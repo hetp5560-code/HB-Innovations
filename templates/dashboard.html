@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard | HB Innovations</title>
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Bootstrap Icons -->
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
+    <!-- Dashboard CSS -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/dashboard.css') }}">
+</head>
+
+<body>
+
+    <!-- ================= SIDEBAR ================= -->
+
+    <div class="sidebar">
+
+        <div class="logo">
+            <h2>HB Innovations</h2>
+            <p>Designer</p>
+        </div>
+
+        <ul>
+
+            <!-- Dashboard -->
+            <li class="active">
+                <a href="/dashboard">
+                    <i class="bi bi-grid-fill"></i>
+                    Dashboard
+                </a>
+            </li>
+
+            <!-- Profile -->
+            <li>
+                <a href="/profile">
+                    <i class="bi bi-person-circle"></i>
+                    My Profile
+                </a>
+            </li>
+
+            <!-- Education -->
+            <li>
+                <a href="/education">
+                    <i class="bi bi-mortarboard-fill"></i>
+                    Education
+                </a>
+            </li>
+
+            <!-- Experience -->
+            <li>
+                <a href="/experience">
+                    <i class="bi bi-briefcase-fill"></i>
+                    Experience
+                </a>
+            </li>
+
+            <!-- Skills -->
+            <li>
+                <a href="/skills">
+                    <i class="bi bi-lightning-fill"></i>
+                    Skills
+                </a>
+            </li>
+
+            <!-- Projects -->
+            <li>
+                <a href="/projects">
+                    <i class="bi bi-folder-fill"></i>
+                    Projects
+                </a>
+            </li>
+
+            <!-- Certificates -->
+            <li>
+                <a href="/certificates">
+                    <i class="bi bi-award-fill"></i>
+                    Certificates
+                </a>
+            </li>
+
+            <!-- Photo Studio -->
+            <li>
+                <a href="/photo-editor">
+                    <i class="bi bi-camera-fill"></i>
+                    Photo Studio
+                </a>
+            </li>
+
+            <!-- Birthday Templates -->
+            <li>
+                <a href="/birthday">
+                    <i class="bi bi-balloon-fill"></i>
+                    Birthday Templates
+                </a>
+            </li>
+            <!-- Collage Maker -->
+<li>
+    <a href="/collage">
+        <i class="bi bi-grid-3x3-gap-fill"></i>
+        Collage Maker
+    </a>
+</li>
+
+            <!-- Resume -->
+            <li>
+                <a href="/resume">
+                    <i class="bi bi-file-earmark-pdf-fill"></i>
+                    Resume
+                </a>
+            </li>
+
+            <!-- Logout -->
+            <li>
+                <a href="#">
+                    <i class="bi bi-box-arrow-right"></i>
+                    Logout
+                </a>
+            </li>
+
+        </ul>
+
+    </div>
+
+
+    <!-- ================= MAIN CONTENT ================= -->
+
+    <div class="main">
+
+        <!-- Top Bar -->
+        <div class="topbar">
+
+            <div>
+                <h3>Welcome Back 👋</h3>
+                <p>Let's build your professional resume.</p>
+            </div>
+
+            <div class="user">
+                <i class="bi bi-person-circle"></i>
+            </div>
+
+        </div>
+
+
+        <!-- ================= STATISTICS CARDS ================= -->
+
+        <div class="cards">
+
+            <!-- Profile -->
+            <div class="card-box">
+
+                <i class="bi bi-person-check-fill"></i>
+
+                <h4>Profile</h4>
+
+                <span>20%</span>
+
+            </div>
+
+
+            <!-- Experience -->
+            <a href="/experience" class="text-decoration-none text-dark">
+
+                <div class="card-box">
+
+                    <i class="bi bi-briefcase-fill"></i>
+
+                    <h4>Experience</h4>
+
+                    <span>0</span>
+
+                </div>
+
+            </a>
+
+
+            <!-- Education -->
+            <a href="/education" class="text-decoration-none text-dark">
+
+                <div class="card-box">
+
+                    <i class="bi bi-mortarboard-fill"></i>
+
+                    <h4>Education</h4>
+
+                    <span>0</span>
+
+                </div>
+
+            </a>
+
+
+            <!-- Skills -->
+            <a href="/skills" class="text-decoration-none text-dark">
+
+                <div class="card-box">
+
+                    <i class="bi bi-lightning-fill"></i>
+
+                    <h4>Skills</h4>
+
+                    <span>0</span>
+
+                </div>
+
+            </a>
+
+
+            <!-- Projects -->
+            <a href="/projects" class="text-decoration-none text-dark">
+
+                <div class="card-box">
+
+                    <i class="bi bi-folder-fill"></i>
+
+                    <h4>Projects</h4>
+
+                    <span>0</span>
+
+                </div>
+
+            </a>
+
+
+            <!-- Certificates -->
+            <a href="/certificates" class="text-decoration-none text-dark">
+
+                <div class="card-box">
+
+                    <i class="bi bi-award-fill"></i>
+
+                    <h4>Certificates</h4>
+
+                    <span>0</span>
+
+                </div>
+
+            </a>
+
+
+            <!-- Resume -->
+            <a href="/resume" class="text-decoration-none text-dark">
+
+                <div class="card-box">
+
+                    <i class="bi bi-file-earmark-pdf-fill"></i>
+
+                    <h4>Resume</h4>
+
+                    <span>Ready</span>
+
+                </div>
+
+            </a>
+
+
+            <!-- Birthday -->
+            <a href="/birthday" class="text-decoration-none text-dark">
+
+                <div class="card-box">
+
+                    <i class="bi bi-balloon-fill"></i>
+
+                    <h4>Birthday</h4>
+
+                    <span>100 Templates</span>
+
+                </div>
+
+            </a>
+
+        </div>
+        <!-- Collage Maker -->
+<a href="/collage" class="text-decoration-none text-dark">
+    <div class="card-box">
+        <i class="bi bi-grid-3x3-gap-fill"></i>
+        <h4>Collage Maker</h4>
+        <span>50 Templates</span>
+    </div>
+</a>
+
+
+        <!-- ================= PHOTO STUDIO ================= -->
+
+        <div class="photo-studio-card">
+
+            <div class="photo-studio-content">
+
+                <div>
+
+                    <h4>
+                        <i class="bi bi-camera-fill"></i>
+                        Professional Photo Studio
+                    </h4>
+
+                    <p>
+                        Create a professional photo for your resume,
+                        passport, ID card and profile.
+                    </p>
+
+
+                    <div class="photo-features">
+
+                        <span>
+                            <i class="bi bi-crop"></i>
+                            Crop
+                        </span>
+
+                        <span>
+                            <i class="bi bi-person-bounding-box"></i>
+                            Remove Background
+                        </span>
+
+                        <span>
+                            <i class="bi bi-stars"></i>
+                            Enhance
+                        </span>
+
+                        <span>
+                            <i class="bi bi-aspect-ratio"></i>
+                            Passport Size
+                        </span>
+
+                        <span>
+                            <i class="bi bi-circle"></i>
+                            Shapes
+                        </span>
+
+                        <span>
+                            <i class="bi bi-image"></i>
+                            Frames
+                        </span>
+
+                    </div>
+
+
+                    <a href="/photo-editor" class="btn btn-primary mt-3">
+
+                        <i class="bi bi-camera"></i>
+
+                        Open Photo Studio
+
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <!-- ================= RESUME PROGRESS ================= -->
+
+        <div class="progress-card">
+
+            <h4>Resume Completion</h4>
+
+            <div class="progress mt-3">
+
+                <div class="progress-bar progress-bar-striped progress-bar-animated"
+                    style="width:20%;">
+
+                    20%
+
+                </div>
+
+            </div>
+
+            <p class="mt-3">
+
+                Complete your profile to unlock all resume templates.
+
+            </p>
+
+            <a href="/profile" class="btn btn-primary mt-2">
+
+                Complete Profile
+
+            </a>
+
+        </div>
+
+
+    </div>
+
+
+    <!-- Sidebar Scroll CSS -->
+    <style>
+
+        .sidebar {
+            height: 100vh;
+            overflow-y: auto;
+            overflow-x: hidden;
+            position: fixed;
+            top: 0;
+            left: 0;
+        }
+
+        .sidebar ul {
+            padding-bottom: 30px;
+        }
+
+        .sidebar::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        .sidebar::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .sidebar::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.35);
+            border-radius: 10px;
+        }
+
+        .sidebar::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.6);
+        }
+
+    </style>
+
+</body>
+
+</html>

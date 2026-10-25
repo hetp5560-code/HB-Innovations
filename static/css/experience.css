@@ -1,0 +1,57 @@
+body{
+    background:#f4f7fc;
+    font-family:Poppins,sans-serif;
+}
+
+.experience-card{
+    max-width:700px;
+    margin:auto;
+    background:#fff;
+    padding:35px;
+    border-radius:18px;
+    box-shadow:0 10px 30px rgba(0,0,0,.12);
+}
+
+h2{
+    font-weight:700;
+}
+
+.btn-primary{
+    padding:12px;
+    border-radius:10px;
+    font-weight:600;
+}
+.stepper{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin:30px 0;
+}
+
+.step{
+    width:55px;
+    height:55px;
+    border-radius:50%;
+    background:#ddd;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    font-size:12px;
+    font-weight:bold;
+}
+
+.step.active{
+    background:#0d6efd;
+    color:white;
+}
+
+.line{
+    width:40px;
+    height:4px;
+    background:#ddd;
+}
+
+.step span{
+    font-size:9px;
+}

@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Birthday Card Editor | HB Innovations</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: 'Poppins', sans-serif;
+            background: #f5f7fb;
+            color: #222;
+        }
+
+        .page {
+            padding: 30px;
+        }
+
+        /* TOP BAR */
+
+        .topbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+        }
+
+        .topbar h2 {
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .topbar p {
+            color: #777;
+            margin: 5px 0 0;
+        }
+
+        .back-btn {
+            text-decoration: none;
+            background: #2563eb;
+            color: white;
+            padding: 10px 18px;
+            border-radius: 10px;
+        }
+
+        .back-btn:hover {
+            background: #1d4ed8;
+            color: white;
+        }
+
+        /* MAIN */
+
+        .editor-container {
+            display: grid;
+            grid-template-columns: 380px 1fr;
+            gap: 30px;
+            align-items: start;
+        }
+
+        /* CONTROL PANEL */
+
+        .control-panel {
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,.08);
+        }
+
+        .control-panel h4 {
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        .form-control {
+            border-radius: 10px;
+            padding: 11px 13px;
+        }
+
+        .upload-box {
+            border: 2px dashed #2563eb;
+            border-radius: 14px;
+            padding: 22px;
+            text-align: center;
+            background: #eff6ff;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+
+        .upload-box i {
+            font-size: 40px;
+            color: #2563eb;
+        }
+
+        .upload-box p {
+            margin: 8px 0 0;
+            color: #555;
+            font-size: 13px;
+        }
+
+        .upload-box input {
+            display: none;
+        }
+
+        .wish-box {
+            background: #f8fafc;
+            padding: 12px;
+            border-radius: 10px;
+            font-size: 13px;
+            color: #555;
+            margin-bottom: 20px;
+        }
+
+        .download-btn {
+            width: 100%;
+            border: none;
+            padding: 13px;
+            border-radius: 11px;
+            background: #16a34a;
+            color: white;
+            font-weight: 600;
+            margin-top: 10px;
+        }
+
+        .download-btn:hover {
+            background: #15803d;
+        }
+
+        /* PREVIEW AREA */
+
+        .preview-panel {
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,.08);
+            text-align: center;
+        }
+
+        .preview-panel h4 {
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        #birthdayCanvas {
+            width: 100%;
+            max-width: 650px;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,.15);
+            background: white;
+        }
+
+        .selected-info {
+            margin-top: 15px;
+            color: #777;
+            font-size: 14px;
+        }
+
+        /* MOBILE */
+
+        @media(max-width:900px) {
+
+            .editor-container {
+                grid-template-columns: 1fr;
+            }
+
+        }
+
+        @media(max-width:600px) {
+
+            .page {
+                padding: 15px;
+            }
+
+            .topbar {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 15px;
+            }
+
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<div class="page">
+
+
+    <!-- TOP BAR -->
+
+    <div class="topbar">
+
+        <div>
+
+            <h2>🎂 Birthday Card Editor</h2>
+
+            <p>Create your personalized birthday card</p>
+
+        </div>
+
+        <a href="/birthday/{{ category }}" class="back-btn">
+
+            <i class="bi bi-arrow-left"></i>
+
+            Back to Templates
+
+        </a>
+
+    </div>
+
+
+    <div class="editor-container">
+
+
+        <!-- =========================
+             LEFT CONTROL PANEL
+        ========================== -->
+
+        <div class="control-panel">
+
+            <h4>
+                ✨ Customize Your Card
+            </h4>
+
+
+            <!-- PHOTO -->
+
+            <label class="form-label">
+                Select Your Photo
+            </label>
+
+            <label class="upload-box">
+
+                <i class="bi bi-camera-fill"></i>
+
+                <p>
+                    Click here to select photo
+                </p>
+
+                <input
+                    type="file"
+                    id="photoInput"
+                    accept="image/*">
+
+            </label>
+
+
+            <!-- NAME -->
+
+            <div class="mb-3">
+
+                <label class="form-label">
+                    Birthday Person Name
+                </label>
+
+                <input
+                    type="text"
+                    id="nameInput"
+                    class="form-control"
+                    placeholder="Enter name"
+                    value="Birthday Star">
+
+            </div>
+
+
+            <!-- AGE -->
+
+            <div class="mb-3">
+
+                <label class="form-label">
+                    Age
+                </label>
+
+                <input
+                    type="number"
+                    id="ageInput"
+                    class="form-control"
+                    placeholder="Enter age"
+                    min="1"
+                    max="120"
+                    value="18">
+
+            </div>
+
+
+            <!-- WISH -->
+
+            <label class="form-label">
+                Birthday Wish
+            </label>
+
+            <div class="wish-box" id="wishBox">
+                Happy Birthday! 🎂
+            </div>
+
+
+            <!-- DOWNLOAD -->
+
+            <button
+                class="download-btn"
+                onclick="downloadCard()">
+
+                <i class="bi bi-download"></i>
+
+                Download Birthday Card
+
+            </button>
+
+        </div>
+
+
+        <!-- =========================
+             RIGHT PREVIEW
+        ========================== -->
+
+        <div class="preview-panel">
+
+            <h4>
+                👀 Live Preview
+            </h4>
+
+            <canvas
+                id="birthdayCanvas"
+                width="800"
+                height="1000">
+            </canvas>
+
+            <div class="selected-info">
+
+                Template {{ template }}
+
+                {% if category == "girl" %}
+                    • Girl Birthday 👧
+                {% else %}
+                    • Boy Birthday 👦
+                {% endif %}
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</div>
+
+
+<script>
+
+    /* =========================
+       DATA FROM FLASK
+    ========================== */
+
+    const category = "{{ category }}";
+
+    const templateNumber = parseInt("{{ template }}");
+
+
+    /* =========================
+       CANVAS
+    ========================== */
+
+    const canvas = document.getElementById("birthdayCanvas");
+
+    const ctx = canvas.getContext("2d");
+
+
+    /* =========================
+       BIRTHDAY WISHES
+    ========================== */
+
+    const wishes = [
+
+        "Happy Birthday! May your day be filled with love, smiles and beautiful memories. 💖",
+
+        "Wishing you a wonderful birthday filled with happiness and endless joy! 🎉",
+
+        "Another year of beautiful moments. Keep smiling and keep shining! ✨",
+
+        "May all your dreams come true and your birthday be truly special! 🎂",
+
+        "Sending lots of love, happiness and warm wishes on your special day! 💕",
+
+        "Celebrate today, smile always and enjoy every beautiful moment! 🥳",
+
+        "May your special day bring endless happiness and unforgettable memories! 🌸",
+
+        "Happy Birthday! Keep shining brighter every single day! ⭐",
+
+        "Wishing you laughter, love and happiness today and always! 🎈",
+
+        "Have a magical birthday filled with wonderful surprises! 🪄",
+
+        "Cheers to another beautiful year of life and happiness! 🥂",
+
+        "May your birthday be as amazing and special as you are! 💫",
+
+        "Keep smiling, keep dreaming and keep making beautiful memories! ❤️",
+
+        "Today is your day. Celebrate, enjoy and shine! 🎊",
+
+        "Wishing you a year full of success, happiness and beautiful moments! 🌟",
+
+        "May every moment of your birthday bring a reason to smile! 😊",
+
+        "Happy Birthday! Make today unforgettable! 🎁",
+
+        "Sending you birthday wishes filled with love, laughter and joy! 💝",
+
+        "May this new year of your life be full of amazing adventures! ✨",
+
+        "Dance, laugh, celebrate and enjoy your special day! 🎉",
+
+        "A beautiful day for a beautiful celebration. Happy Birthday! 🎂",
+
+        "May happiness follow you wherever you go. Happy Birthday! 💙",
+
+        "Your special day deserves special memories. Have a fantastic birthday! 📸",
+
+        "Wishing you countless reasons to smile in the coming year! 🌈",
+
+        "Happy Birthday! Here's to another amazing chapter of your life! 👑"
+
+    ];
+
+
+    const wish = wishes[templateNumber - 1] || wishes[0];
+
+    document.getElementById("wishBox").innerText = wish;
+
+
+    /* =========================
+       TEMPLATE COLORS
+    ========================== */
+
+    const gradients = [
+
+        ["#ffd6e8", "#fff1f7"],
+        ["#dbeafe", "#eff6ff"],
+        ["#fef3c7", "#fde68a"],
+        ["#ede9fe", "#ddd6fe"],
+        ["#fce7f3", "#fbcfe8"],
+        ["#cffafe", "#a5f3fc"],
+        ["#dcfce7", "#bbf7d0"],
+        ["#ffedd5", "#fed7aa"],
+        ["#e0e7ff", "#c7d2fe"],
+        ["#f5d0fe", "#e879f9"],
+        ["#fef9c3", "#fde047"],
+        ["#bae6fd", "#7dd3fc"],
+        ["#fecdd3", "#fda4af"],
+        ["#ddd6fe", "#a78bfa"],
+        ["#d1fae5", "#6ee7b7"],
+        ["#fed7aa", "#fb923c"],
+        ["#bfdbfe", "#60a5fa"],
+        ["#fbcfe8", "#f472b6"],
+        ["#e9d5ff", "#c084fc"],
+        ["#ccfbf1", "#5eead4"],
+        ["#fee2e2", "#f87171"],
+        ["#dbeafe", "#818cf8"],
+        ["#fef3c7", "#fb7185"],
+        ["#e0f2fe", "#38bdf8"],
+        ["#fae8ff", "#d946ef"]
+
+    ];
+
+
+    /* =========================
+       PHOTO
+    ========================== */
+
+    let photo = null;
+
+
+    document
+        .getElementById("photoInput")
+        .addEventListener("change", function(event) {
+
+            const file = event.target.files[0];
+
+            if (!file) {
+                return;
+            }
+
+            const reader = new FileReader();
+
+            reader.onload = function(e) {
+
+                const img = new Image();
+
+                img.onload = function() {
+
+                    photo = img;
+
+                    drawCard();
+
+                };
+
+                img.src = e.target.result;
+
+            };
+
+            reader.readAsDataURL(file);
+
+        });
+
+
+    /* =========================
+       INPUT EVENTS
+    ========================== */
+
+    document
+        .getElementById("nameInput")
+        .addEventListener("input", drawCard);
+
+
+    document
+        .getElementById("ageInput")
+        .addEventListener("input", drawCard);
+
+
+    /* =========================
+       DRAW GRADIENT
+    ========================== */
+
+    function drawBackground() {
+
+        const colors =
+            gradients[templateNumber - 1] || gradients[0];
+
+        const gradient =
+            ctx.createLinearGradient(
+                0,
+                0,
+                canvas.width,
+                canvas.height
+            );
+
+        gradient.addColorStop(0, colors[0]);
+
+        gradient.addColorStop(1, colors[1]);
+
+        ctx.fillStyle = gradient;
+
+        ctx.fillRect(
+            0,
+            0,
+            canvas.width,
+            canvas.height
+        );
+
+    }
+
+
+    /* =========================
+       DRAW DECORATIONS
+    ========================== */
+
+    function drawDecorations() {
+
+        ctx.font = "55px Arial";
+
+        ctx.fillText("🎈", 35, 70);
+
+        ctx.fillText("✨", 700, 70);
+
+        ctx.fillText("🎉", 35, 950);
+
+        ctx.fillText("🎂", 700, 950);
+
+    }
+
+
+    /* =========================
+       DRAW PHOTO
+    ========================== */
+
+    function drawPhoto() {
+
+        const frameX = 200;
+
+        const frameY = 105;
+
+        const frameW = 400;
+
+        const frameH = 400;
+
+
+        ctx.save();
+
+
+        /* Different shape for templates */
+
+        if (templateNumber % 3 === 0) {
+
+            ctx.beginPath();
+
+            ctx.arc(
+                frameX + frameW / 2,
+                frameY + frameH / 2,
+                frameW / 2,
+                0,
+                Math.PI * 2
+            );
+
+            ctx.clip();
+
+        }
+
+        else if (templateNumber % 2 === 0) {
+
+            const radius = 45;
+
+            ctx.beginPath();
+
+            ctx.roundRect(
+                frameX,
+                frameY,
+                frameW,
+                frameH,
+                radius
+            );
+
+            ctx.clip();
+
+        }
+
+        else {
+
+            ctx.beginPath();
+
+            ctx.rect(
+                frameX,
+                frameY,
+                frameW,
+                frameH
+            );
+
+            ctx.clip();
+
+        }
+
+
+        /* Empty frame */
+
+        if (!photo) {
+
+            ctx.fillStyle = "rgba(255,255,255,.75)";
+
+            ctx.fillRect(
+                frameX,
+                frameY,
+                frameW,
+                frameH
+            );
+
+            ctx.restore();
+
+            ctx.fillStyle = "#777";
+
+            ctx.font = "70px Arial";
+
+            ctx.textAlign = "center";
+
+            ctx.fillText(
+                "📷",
+                canvas.width / 2,
+                frameY + frameH / 2 + 25
+            );
+
+            ctx.textAlign = "left";
+
+            return;
+
+        }
+
+
+        /* Automatic cover crop */
+
+        const scale = Math.max(
+            frameW / photo.width,
+            frameH / photo.height
+        );
+
+
+        const drawW = photo.width * scale;
+
+        const drawH = photo.height * scale;
+
+
+        const drawX =
+            frameX +
+            (frameW - drawW) / 2;
+
+
+        const drawY =
+            frameY +
+            (frameH - drawH) / 2;
+
+
+        ctx.drawImage(
+            photo,
+            drawX,
+            drawY,
+            drawW,
+            drawH
+        );
+
+
+        ctx.restore();
+
+
+        /* Frame border */
+
+        ctx.strokeStyle = "#ffffff";
+
+        ctx.lineWidth = 15;
+
+        if (templateNumber % 3 === 0) {
+
+            ctx.beginPath();
+
+            ctx.arc(
+                frameX + frameW / 2,
+                frameY + frameH / 2,
+                frameW / 2,
+                0,
+                Math.PI * 2
+            );
+
+            ctx.stroke();
+
+        }
+
+        else {
+
+            ctx.strokeRect(
+                frameX,
+                frameY,
+                frameW,
+                frameH
+            );
+
+        }
+
+    }
+
+
+    /* =========================
+       DRAW TEXT
+    ========================== */
+
+    function drawText() {
+
+        const name =
+            document.getElementById("nameInput").value
+            || "Birthday Star";
+
+        const age =
+            document.getElementById("ageInput").value
+            || "18";
+
+
+        ctx.textAlign = "center";
+
+
+        /* Age */
+
+        ctx.fillStyle = "#111827";
+
+        ctx.font = "800 75px Poppins, Arial";
+
+        ctx.fillText(
+            age,
+            canvas.width / 2,
+            585
+        );
+
+
+        /* Title */
+
+        ctx.font = "700 42px Poppins, Arial";
+
+        if (category === "girl") {
+
+            ctx.fillText(
+                "Birthday Princess",
+                canvas.width / 2,
+                650
+            );
+
+        } else {
+
+            ctx.fillText(
+                "Birthday Champ",
+                canvas.width / 2,
+                650
+            );
+
+        }
+
+
+        /* Name */
+
+        ctx.fillStyle = "#111827";
+
+        ctx.font = "700 48px Poppins, Arial";
+
+        ctx.fillText(
+            name,
+            canvas.width / 2,
+            720
+        );
+
+
+        /* Wish */
+
+        ctx.font = "400 22px Poppins, Arial";
+
+        wrapText(
+            wish,
+            canvas.width / 2,
+            775,
+            600,
+            32
+        );
+
+
+        ctx.textAlign = "left";
+
+    }
+
+
+    /* =========================
+       TEXT WRAPPING
+    ========================== */
+
+    function wrapText(
+        text,
+        x,
+        y,
+        maxWidth,
+        lineHeight
+    ) {
+
+        const words = text.split(" ");
+
+        let line = "";
+
+        for (let n = 0; n < words.length; n++) {
+
+            const testLine =
+                line + words[n] + " ";
+
+            const metrics =
+                ctx.measureText(testLine);
+
+            const testWidth =
+                metrics.width;
+
+
+            if (
+                testWidth > maxWidth &&
+                n > 0
+            ) {
+
+                ctx.fillText(
+                    line,
+                    x,
+                    y
+                );
+
+                line =
+                    words[n] + " ";
+
+                y += lineHeight;
+
+            }
+
+            else {
+
+                line = testLine;
+
+            }
+
+        }
+
+        ctx.fillText(
+            line,
+            x,
+            y
+        );
+
+    }
+
+
+    /* =========================
+       DRAW COMPLETE CARD
+    ========================== */
+
+    function drawCard() {
+
+        ctx.clearRect(
+            0,
+            0,
+            canvas.width,
+            canvas.height
+        );
+
+
+        drawBackground();
+
+        drawDecorations();
+
+        drawPhoto();
+
+        drawText();
+
+    }
+
+
+    /* =========================
+       DOWNLOAD
+    ========================== */
+
+    function downloadCard() {
+
+        const name =
+            document.getElementById("nameInput").value
+            || "birthday-card";
+
+
+        const link =
+            document.createElement("a");
+
+        link.download =
+            name.replace(/\s+/g, "-") +
+            "-birthday-card.png";
+
+
+        link.href =
+            canvas.toDataURL("image/png");
+
+
+        link.click();
+
+    }
+
+
+    /* =========================
+       INITIAL PREVIEW
+    ========================== */
+
+    drawCard();
+
+</script>
+
+
+</body>
+
+</html>

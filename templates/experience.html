@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Experience | HB Innovations</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet"
+      href="{{ url_for('static', filename='css/common.css') }}">
+      
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/experience.css') }}">
+
+</head>
+
+<body>
+<div class="stepper">
+
+    <div class="step active">1<br><span>Profile</span></div>
+
+    <div class="line"></div>
+
+    <div class="step active">2<br><span>Education</span></div>
+
+    <div class="line"></div>
+
+    <div class="step active">3<br><span>Experience</span></div>
+
+    <div class="line"></div>
+
+    <div class="step">4<br><span>Skills</span></div>
+
+    <div class="line"></div>
+
+    <div class="step">5<br><span>Projects</span></div>
+
+    <div class="line"></div>
+
+    <div class="step">6<br><span>Certificates</span></div>
+
+    <div class="line"></div>
+
+    <div class="step">7<br><span>Resume</span></div>
+
+</div>
+<div class="container py-5">
+
+    <div class="experience-card">
+
+        <h2 class="text-center mb-4">
+            💼 Work Experience
+        </h2>
+
+        <form method="POST">
+
+            <div class="mb-3">
+
+                <label>Company Name</label>
+
+                <input
+                    type="text"
+                    name="company"
+                    class="form-control"
+                    value="{{ experience.company if experience else '' }}"
+                    required>
+
+            </div>
+
+            <div class="mb-3">
+
+                <label>Job Role</label>
+
+                <input
+                    type="text"
+                    name="role"
+                    class="form-control"
+                    value="{{ experience.role if experience else '' }}"
+                    required>
+
+            </div>
+
+            <div class="mb-3">
+
+                <label>Duration</label>
+
+                <input
+                    type="text"
+                    name="duration"
+                    class="form-control"
+                    placeholder="Jan 2025 - Present"
+                    value="{{ experience.duration if experience else '' }}">
+
+            </div>
+
+            <div class="mb-3">
+
+                <label>Description</label>
+
+                <textarea
+                    name="description"
+                    rows="5"
+                    class="form-control">{{ experience.description if experience else '' }}</textarea>
+
+            </div>
+
+            <button type="submit" class="btn btn-primary w-100">
+                Save & Continue
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+</html>

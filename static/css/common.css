@@ -1,0 +1,55 @@
+body{
+    background:#f4f7fc;
+    font-family:'Poppins',sans-serif;
+}
+
+.stepper{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    margin:30px 0;
+    flex-wrap:wrap;
+}
+
+.step{
+    width:55px;
+    height:55px;
+    border-radius:50%;
+    background:#ddd;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    font-size:12px;
+    font-weight:bold;
+}
+
+.step.active{
+    background:#0d6efd;
+    color:white;
+}
+
+.line{
+    width:40px;
+    height:4px;
+    background:#ddd;
+}
+
+.step span{
+    font-size:9px;
+}
+
+label{
+    font-weight:600;
+}
+
+.form-control,
+.form-select{
+    border-radius:10px;
+}
+
+.btn{
+    border-radius:10px;
+    padding:12px;
+    font-weight:600;
+}

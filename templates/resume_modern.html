@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Resume | HB Innovations</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/resume_new.css') }}">
+
+    <link rel="stylesheet"
+          href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+</head>
+
+<body>
+
+<div class="resume">
+
+    <!-- Sidebar -->
+
+    <div class="sidebar">
+
+        <div class="profile">
+
+            {% if profile.photo %}
+
+            <img src="{{ url_for('static', filename='uploads/profile/' + profile.photo) }}"
+     class="profile-img">
+            
+
+            {% else %}
+
+            <img
+            src="{{ url_for('static', filename='images/default.png') }}"
+            class="profile-img">
+
+            {% endif %}
+
+            <h2>{{ user.full_name }}</h2>
+
+            <p>Python Full Stack Developer</p>
+
+        </div>
+
+        <hr>
+
+        <h4>Contact</h4>
+
+        <div class="contact">
+
+            <p><i class="bi bi-envelope-fill"></i> {{ user.email }}</p>
+
+            <p><i class="bi bi-telephone-fill"></i> {{ profile.phone }}</p>
+
+            <p><i class="bi bi-geo-alt-fill"></i>
+
+                {{ profile.city }},
+
+                {{ profile.state }}
+
+            </p>
+
+        </div>
+
+        <hr>
+
+        <h4>Skills</h4>
+
+        <div class="skill">
+
+            {{ skills.skill_name }}
+
+        </div>
+
+    </div>
+
+    <!-- Main Content -->
+
+    <div class="content">
+
+        <section>
+
+            <h2>About Me</h2>
+
+            <p>
+
+                {{ profile.about }}
+
+            </p>
+
+        </section>
+                <hr>
+
+        <section>
+
+            <h2>Education</h2>
+
+            <div class="resume-card">
+
+                <h4>{{ education.degree }}</h4>
+
+                <h6>{{ education.institute }}</h6>
+
+                <span>{{ education.passing_year }}</span>
+
+            </div>
+
+        </section>
+
+        <hr>
+
+        <section>
+
+            <h2>Experience</h2>
+
+            <div class="resume-card">
+
+                <h4>{{ experience.role }}</h4>
+
+                <h6>{{ experience.company }}</h6>
+
+                <span>{{ experience.duration }}</span>
+
+                <p>
+
+                    {{ experience.description }}
+
+                </p>
+
+            </div>
+
+        </section>
+
+        <hr>
+
+        <section>
+
+            <h2>Projects</h2>
+
+            <div class="resume-card">
+
+                <h4>{{ projects.project_name }}</h4>
+
+                <p>
+
+                    {{ projects.description }}
+
+                </p>
+
+                {% if projects.github_link %}
+
+                <a href="{{ projects.github_link }}"
+                   target="_blank">
+
+                    View Project
+
+                </a>
+
+                {% endif %}
+
+            </div>
+
+        </section>
+
+        <hr>
+
+        <section>
+
+            <h2>Certificates</h2>
+
+            <ul class="certificate-list">
+
+                {% for certificate in certificates %}
+
+                <li>
+
+                    <a href="{{ url_for('static',
+                    filename='uploads/certificates/' + certificate.certificate_file) }}"
+                    target="_blank">
+
+                        {{ certificate.certificate_name }}
+                        ({{ certificate.year }})
+
+                    </a>
+
+                </li>
+
+                {% endfor %}
+
+            </ul>
+
+        </section>
+
+    </div>
+
+</div>
+
+</body>
+
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <title>Skills</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <link rel="stylesheet"
+      href="{{ url_for('static', filename='css/common.css') }}">
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/skills.css') }}">
+
+</head>
+
+<body>
+<div class="stepper">
+
+    <div class="step active">
+        1
+        <span>Profile</span>
+    </div>
+
+    <div class="line"></div>
+
+    <div class="step active">
+        2
+        <span>Education</span>
+    </div>
+
+    <div class="line"></div>
+
+    <div class="step active">
+        3
+        <span>Experience</span>
+    </div>
+
+    <div class="line"></div>
+
+    <div class="step active">
+        4
+        <span>Skills</span>
+    </div>
+
+    <div class="line"></div>
+
+    <div class="step">
+        5
+        <span>Projects</span>
+    </div>
+
+    <div class="line"></div>
+
+    <div class="step">
+        6
+        <span>Certificates</span>
+    </div>
+
+    <div class="line"></div>
+
+    <div class="step">
+        7
+        <span>Resume</span>
+    </div>
+
+</div>
+<div class="container py-5">
+
+    <div class="skills-card">
+
+        <h2 class="text-center mb-4">
+            ⚡ Skills
+        </h2>
+
+        <form method="POST">
+
+            <label>Skills</label>
+
+            <textarea
+                class="form-control"
+                rows="6"
+                name="skill_name"
+                placeholder="Python, Flask, HTML, CSS, JavaScript">{{ skills.skill_name if skills else '' }}</textarea>
+
+            <button
+                class="btn btn-primary w-100 mt-4"
+                type="submit">
+
+                Save & Continue
+
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+</body>
+</html>

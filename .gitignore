@@ -1,0 +1,36 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Virtual Environment
+venv/
+.venv/
+env/
+
+# Database
+database.db
+*.sqlite
+*.sqlite3
+
+# Secrets
+.env
+
+# Flask
+instance/
+
+# Uploaded files
+static/uploads/profile/*
+static/uploads/certificates/*
+
+# Keep upload folders
+!static/uploads/profile/.gitkeep
+!static/uploads/certificates/.gitkeep
+
+# VS Code
+.vscode/
+
+# Windows
+Thumbs.db
+/HB InnovationsDesigner/

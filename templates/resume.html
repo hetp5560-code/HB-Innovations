@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Resume Preview | HB Innovations</title>
+
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Common CSS -->
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/common.css') }}">
+
+    <!-- Resume CSS -->
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='css/resume.css') }}">
+
+</head>
+
+<body>
+
+<div class="container py-5">
+
+    <div class="resume-card">
+
+        <h1 class="text-center">{{ user.full_name }}</h1>
+
+        <p class="text-center">
+            {{ user.email }}
+        </p>
+
+        <hr>
+
+        <h3>About Me</h3>
+
+        <p>
+            {{ profile.about }}
+        </p>
+
+        <hr>
+
+        <h3>Education</h3>
+
+        <p>
+            <strong>{{ education.degree }}</strong><br>
+
+            {{ education.institute }}<br>
+
+            {{ education.passing_year }}
+        </p>
+
+        <hr>
+
+        <h3>Experience</h3>
+
+        <p>
+
+            <strong>{{ experience.role }}</strong><br>
+
+            {{ experience.company }}<br>
+
+            {{ experience.duration }}
+
+        </p>
+
+        <hr>
+
+        <h3>Skills</h3>
+
+        <p>
+
+            {{ skills.skill_name }}
+
+        </p>
+
+        <hr>
+
+        <h3>Projects</h3>
+
+        <p>
+
+            <strong>{{ projects.project_name }}</strong><br>
+
+            {{ projects.description }}
+
+        </p>
+
+        <hr>
+
+        <h3>Certificates</h3>
+
+{% if certificates %}
+
+<ul>
+
+{% for certificate in certificates %}
+
+<li>
+
+<a href="{{ url_for('static', filename='uploads/certificates/' + certificate.certificate_file) }}"
+   target="_blank">
+
+{{ certificate.certificate_name }} ({{ certificate.year }})
+
+</a>
+
+</li>
+
+{% endfor %}
+
+</ul>
+
+{% else %}
+
+<p>No Certificates Added</p>
+
+{% endif %}
+
+    </div>
+
+</div>
+
+</body>
+</html>

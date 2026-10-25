@@ -1,0 +1,2095 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Photo Studio | HB Innovations</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+        rel="stylesheet">
+
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: #f5f7fb;
+            margin: 0;
+        }
+
+        .topbar {
+            background: white;
+            padding: 18px 35px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.06);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .topbar h3 {
+            margin: 0;
+            font-weight: 600;
+        }
+
+        .topbar p {
+            margin: 4px 0 0;
+            color: #777;
+        }
+
+        .back-btn {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+        }
+
+        .editor-container {
+            max-width: 1250px;
+            margin: 35px auto;
+            padding: 0 20px;
+        }
+
+        .editor-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 5px 25px rgba(0,0,0,0.07);
+        }
+
+        .upload-box {
+            border: 2px dashed #b8c0d0;
+            border-radius: 15px;
+            padding: 50px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .upload-box:hover {
+            border-color: #0d6efd;
+            background: #f8fbff;
+        }
+
+        .upload-box i {
+            font-size: 55px;
+            color: #0d6efd;
+        }
+
+        .upload-box h5 {
+            margin-top: 15px;
+            font-weight: 600;
+        }
+
+        #photoInput {
+            display: none;
+        }
+
+        .editor-area {
+            display: none;
+            margin-top: 30px;
+        }
+
+        /* Preview */
+
+        .preview-box {
+            background:
+                linear-gradient(45deg, #ddd 25%, transparent 25%),
+                linear-gradient(-45deg, #ddd 25%, transparent 25%),
+                linear-gradient(45deg, transparent 75%, #ddd 75%),
+                linear-gradient(-45deg, transparent 75%, #ddd 75%);
+            background-size: 25px 25px;
+            background-position: 0 0, 0 12px, 12px -12px, -12px 0;
+            min-height: 500px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            padding: 25px;
+        }
+
+        #canvas {
+            max-width: 100%;
+            max-height: 450px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.2);
+        }
+
+        /* Tools */
+
+        .tool-group {
+            background: #f8f9fc;
+            padding: 15px;
+            border-radius: 14px;
+            margin-bottom: 15px;
+        }
+
+        .section-title {
+            font-size: 14px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .tool-btn {
+            border: 1px solid #ddd;
+            background: white;
+            padding: 9px 12px;
+            border-radius: 9px;
+            margin: 3px;
+            cursor: pointer;
+            transition: 0.2s;
+            font-size: 13px;
+        }
+
+        .tool-btn:hover {
+            background: #0d6efd;
+            color: white;
+            border-color: #0d6efd;
+        }
+
+        .form-select,
+        .form-control {
+            font-size: 13px;
+        }
+
+        .range-value {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .status {
+            font-size: 12px;
+            color: #666;
+            margin-top: 10px;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .background-preview {
+            width: 100%;
+            height: 45px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+            margin-top: 8px;
+        }
+
+        @media(max-width: 768px) {
+
+            .topbar {
+                padding: 15px;
+            }
+
+            .editor-card {
+                padding: 18px;
+            }
+
+            .preview-box {
+                min-height: 350px;
+                margin-bottom: 20px;
+            }
+
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- TOP BAR -->
+
+    <div class="topbar">
+
+        <div>
+            <h3>📸 Photo Studio</h3>
+            <p>Create your professional resume photo</p>
+        </div>
+
+        <a href="/dashboard" class="back-btn">
+            <i class="bi bi-arrow-left"></i>
+            Dashboard
+        </a>
+
+    </div>
+
+
+    <div class="editor-container">
+
+        <div class="editor-card">
+
+            <!-- UPLOAD -->
+
+            <label for="photoInput" class="upload-box">
+
+                <i class="bi bi-cloud-arrow-up-fill"></i>
+
+                <h5>Upload Your Photo</h5>
+
+                <p class="text-muted">
+                    JPG, JPEG or PNG
+                </p>
+
+                <span class="btn btn-primary">
+                    Choose Photo
+                </span>
+
+            </label>
+
+            <input type="file"
+                   id="photoInput"
+                   accept="image/png,image/jpeg,image/jpg">
+
+
+            <!-- EDITOR -->
+
+            <div class="editor-area" id="editorArea">
+
+                <div class="row">
+
+                    <!-- PREVIEW -->
+
+                    <div class="col-lg-7">
+
+                        <div class="preview-box">
+
+                            <canvas id="canvas"></canvas>
+
+                        </div>
+
+                        <div class="status" id="status">
+                            Original photo
+                        </div>
+
+                    </div>
+
+
+                    <!-- TOOLS -->
+
+                    <div class="col-lg-5">
+
+                        <!-- BASIC -->
+
+                        <div class="tool-group">
+
+                            <div class="section-title">
+                                <i class="bi bi-tools"></i>
+                                Basic Tools
+                            </div>
+
+                            <button type="button"
+                                    class="tool-btn"
+                                    onclick="rotateLeft()">
+
+                                <i class="bi bi-arrow-counterclockwise"></i>
+                                Rotate Left
+
+                            </button>
+
+                            <button type="button"
+                                    class="tool-btn"
+                                    onclick="rotateRight()">
+
+                                <i class="bi bi-arrow-clockwise"></i>
+                                Rotate Right
+
+                            </button>
+
+                            <button type="button"
+                                    class="tool-btn"
+                                    onclick="flipHorizontal()">
+
+                                <i class="bi bi-arrow-left-right"></i>
+                                Flip H
+
+                            </button>
+
+                            <button type="button"
+                                    class="tool-btn"
+                                    onclick="flipVertical()">
+
+                                <i class="bi bi-arrow-down-up"></i>
+                                Flip V
+
+                            </button>
+
+                        </div>
+
+
+                        <!-- PASSPORT SIZE -->
+
+                        <div class="tool-group">
+
+                            <div class="section-title">
+                                <i class="bi bi-person-badge"></i>
+                                Passport / Photo Size
+                            </div>
+
+                            <select id="sizeSelect"
+                                    class="form-select"
+                                    onchange="changeSize()">
+
+                                <option value="original">
+                                    Original Size
+                                </option>
+
+                                <option value="passport">
+                                    Passport 35 × 45 mm
+                                </option>
+
+                                <option value="square">
+                                    2 × 2 inch
+                                </option>
+
+                                <option value="profile">
+                                    Profile 1 × 1
+                                </option>
+
+                                <option value="custom">
+                                    Custom Size
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <!-- CUSTOM SIZE -->
+
+                        <div class="tool-group"
+                             id="customSizeBox"
+                             style="display:none;">
+
+                            <div class="section-title">
+                                Custom Size
+                            </div>
+
+                            <div class="row g-2">
+
+                                <div class="col-6">
+
+                                    <input type="number"
+                                           id="customWidth"
+                                           class="form-control"
+                                           placeholder="Width">
+
+                                </div>
+
+                                <div class="col-6">
+
+                                    <input type="number"
+                                           id="customHeight"
+                                           class="form-control"
+                                           placeholder="Height">
+
+                                </div>
+
+                            </div>
+
+                            <button type="button"
+                                    class="btn btn-sm btn-primary mt-2"
+                                    onclick="applyCustomSize()">
+
+                                Apply Size
+
+                            </button>
+
+                        </div>
+
+
+                        <!-- SHAPE -->
+
+                        <div class="tool-group">
+
+                            <div class="section-title">
+                                <i class="bi bi-shapes"></i>
+                                Photo Shape
+                            </div>
+
+                            <select id="shapeSelect"
+                                    class="form-select"
+                                    onchange="changeShape()">
+
+                                <option value="rectangle">
+                                    Rectangle
+                                </option>
+
+                                <option value="rounded">
+                                    Rounded Rectangle
+                                </option>
+
+                                <option value="circle">
+                                    Circle
+                                </option>
+
+                                <option value="heart">
+                                    Heart
+                                </option>
+
+                                <option value="hexagon">
+                                    Hexagon
+                                </option>
+
+                                <option value="diamond">
+                                    Diamond
+                                </option>
+
+                                <option value="star">
+                                    Star
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <!-- FRAME -->
+
+                        <div class="tool-group">
+
+                            <div class="section-title">
+                                <i class="bi bi-border-style"></i>
+                                Frame
+                            </div>
+
+                            <select id="frameSelect"
+                                    class="form-select"
+                                    onchange="changeFrame()">
+
+                                <option value="none">
+                                    No Frame
+                                </option>
+
+                                <option value="simple">
+                                    Simple Border
+                                </option>
+
+                                <option value="thick">
+                                    Thick Border
+                                </option>
+
+                                <option value="double">
+                                    Double Border
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <!-- BLUR BORDER -->
+                        <div class="tool-group">
+                            <div class="section-title">
+                                <i class="bi bi-droplet-half"></i>
+                                Blur Border Effect
+                            </div>
+
+                            <div class="form-check form-switch mb-3">
+                                <input class="form-check-input" type="checkbox"
+                                       id="blurBorderEnabled" onchange="changeBlurBorder()">
+                                <label class="form-check-label" for="blurBorderEnabled">
+                                    Enable Blur Border
+                                </label>
+                            </div>
+
+                            <label class="range-value">
+                                Blur Intensity: <span id="blurValue">12</span> px
+                            </label>
+                            <input type="range" id="blurStrength" min="2" max="30" value="12"
+                                   class="form-range" oninput="updateBlurBorder()">
+
+                            <label class="range-value">
+                                Border Width: <span id="blurBorderWidthValue">15</span>%
+                            </label>
+                            <input type="range" id="blurBorderWidth" min="5" max="30" value="15"
+                                   class="form-range" oninput="updateBlurBorder()">
+
+                            <div class="status">
+                                Keep the main photo clear and add a blurred version around its edges.
+                            </div>
+                        </div>
+
+
+                        <!-- BACKGROUND -->
+
+                        <div class="tool-group">
+
+                            <div class="section-title">
+                                <i class="bi bi-palette-fill"></i>
+                                Background
+                            </div>
+
+                            <select id="backgroundType"
+                                    class="form-select"
+                                    onchange="changeBackground()">
+
+                                <option value="original">
+                                    Original
+                                </option>
+
+                                <option value="white">
+                                    White
+                                </option>
+
+                                <option value="blue">
+                                    Blue
+                                </option>
+
+                                <option value="lightblue">
+                                    Light Blue
+                                </option>
+
+                                <option value="grey">
+                                    Light Grey
+                                </option>
+
+                                <option value="black">
+                                    Black
+                                </option>
+
+                                <option value="custom">
+                                    Custom Color
+                                </option>
+
+                                <option value="transparent">
+                                    Transparent
+                                </option>
+
+                            </select>
+
+
+                            <!-- CUSTOM COLOR -->
+
+                            <div id="customColorBox"
+                                 style="display:none;"
+                                 class="mt-3">
+
+                                <label class="form-label">
+                                    Choose Background Color
+                                </label>
+
+                                <input type="color"
+                                       id="customBackgroundColor"
+                                       value="#ffffff"
+                                       class="form-control form-control-color"
+                                       onchange="changeBackground()">
+
+                            </div>
+
+
+                            <!-- BACKGROUND IMAGE -->
+
+                            <div class="mt-3">
+
+                                <label class="form-label">
+                                    Background Image
+                                </label>
+
+                                <input type="file"
+                                       id="backgroundImageInput"
+                                       class="form-control"
+                                       accept="image/*"
+                                       onchange="loadBackgroundImage(event)">
+
+                            </div>
+
+
+                            <button type="button"
+                                    class="btn btn-outline-danger btn-sm mt-2"
+                                    onclick="removeBackgroundImage()">
+
+                                <i class="bi bi-x-circle"></i>
+                                Remove Background Image
+
+                            </button>
+
+                        </div>
+
+
+                        <!-- QUALITY / COMPRESS -->
+
+                        <div class="tool-group">
+
+                            <div class="section-title">
+                                <i class="bi bi-file-earmark-arrow-down"></i>
+                                Image Quality / Size
+                            </div>
+
+                            <label class="range-value">
+                                JPEG Quality:
+                                <span id="qualityValue">90</span>%
+                            </label>
+
+                            <input type="range"
+                                   id="quality"
+                                   min="10"
+                                   max="100"
+                                   value="90"
+                                   class="form-range"
+                                   oninput="updateQuality()">
+
+
+                            <label class="range-value">
+                                Resize:
+                                <span id="resizeValue">100</span>%
+                            </label>
+
+                            <input type="range"
+                                   id="resize"
+                                   min="20"
+                                   max="100"
+                                   value="100"
+                                   class="form-range"
+                                   oninput="updateResize()">
+
+                        </div>
+
+
+                        <!-- ACTIONS -->
+
+                        <div class="action-buttons">
+
+                            <button type="button"
+                                    class="btn btn-secondary"
+                                    onclick="resetEditor()">
+
+                                <i class="bi bi-arrow-counterclockwise"></i>
+                                Reset
+
+                            </button>
+
+                            <button type="button"
+                                    class="btn btn-success"
+                                    onclick="downloadPhoto()">
+
+                                <i class="bi bi-download"></i>
+                                Download
+
+                            </button>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+<script>
+
+const input = document.getElementById("photoInput");
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
+
+const editorArea = document.getElementById("editorArea");
+const statusText = document.getElementById("status");
+
+
+/* IMAGE */
+
+let image = new Image();
+
+let originalWidth = 0;
+let originalHeight = 0;
+
+
+/* BACKGROUND */
+
+let backgroundType = "original";
+let backgroundColor = "#ffffff";
+let backgroundImage = null;
+
+
+/* EDITING */
+
+let rotation = 0;
+
+let flipX = 1;
+let flipY = 1;
+
+let selectedShape = "rectangle";
+let selectedFrame = "none";
+
+let blurBorderEnabled = false;
+let blurStrength = 12;
+let blurBorderWidth = 15;
+
+let quality = 0.9;
+let resizePercent = 1;
+
+let targetWidth = null;
+let targetHeight = null;
+
+
+/* =========================
+   UPLOAD
+========================= */
+
+input.addEventListener("change", function () {
+
+    const file = this.files[0];
+
+    if (!file) {
+        return;
+    }
+
+    const reader = new FileReader();
+
+    reader.onload = function (event) {
+
+        image.onload = function () {
+
+            originalWidth = image.width;
+            originalHeight = image.height;
+
+            rotation = 0;
+
+            flipX = 1;
+            flipY = 1;
+
+            targetWidth = null;
+            targetHeight = null;
+
+            backgroundType = "original";
+            backgroundImage = null;
+
+            document.getElementById("backgroundType").value =
+                "original";
+
+            document.getElementById("backgroundImageInput").value =
+                "";
+
+            document.getElementById("customColorBox").style.display =
+                "none";
+
+            editorArea.style.display = "block";
+
+            statusText.innerText =
+                "Photo uploaded successfully.";
+
+            draw();
+
+        };
+
+        image.src = event.target.result;
+
+    };
+
+    reader.readAsDataURL(file);
+
+});
+
+
+/* =========================
+   DRAW
+========================= */
+
+function draw() {
+
+    if (!image.src) {
+        return;
+    }
+
+
+    let width =
+        targetWidth || originalWidth;
+
+    let height =
+        targetHeight || originalHeight;
+
+
+    width =
+        width * resizePercent;
+
+    height =
+        height * resizePercent;
+
+
+    const radians =
+        rotation * Math.PI / 180;
+
+
+    const rotated =
+        Math.abs(rotation % 180) === 90;
+
+
+    if (rotated) {
+
+        canvas.width = height;
+        canvas.height = width;
+
+    } else {
+
+        canvas.width = width;
+        canvas.height = height;
+
+    }
+
+
+    /* CLEAR */
+
+    ctx.clearRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+
+    /* =========================
+       BACKGROUND
+    ========================= */
+
+
+    if (backgroundType === "white") {
+
+        ctx.fillStyle = "#ffffff";
+
+        ctx.fillRect(
+            0,
+            0,
+            canvas.width,
+            canvas.height
+        );
+
+    }
+
+
+    else if (backgroundType === "blue") {
+
+        ctx.fillStyle = "#2196f3";
+
+        ctx.fillRect(
+            0,
+            0,
+            canvas.width,
+            canvas.height
+        );
+
+    }
+
+
+    else if (backgroundType === "lightblue") {
+
+        ctx.fillStyle = "#dff3ff";
+
+        ctx.fillRect(
+            0,
+            0,
+            canvas.width,
+            canvas.height
+        );
+
+    }
+
+
+    else if (backgroundType === "grey") {
+
+        ctx.fillStyle = "#eeeeee";
+
+        ctx.fillRect(
+            0,
+            0,
+            canvas.width,
+            canvas.height
+        );
+
+    }
+
+
+    else if (backgroundType === "black") {
+
+        ctx.fillStyle = "#000000";
+
+        ctx.fillRect(
+            0,
+            0,
+            canvas.width,
+            canvas.height
+        );
+
+    }
+
+
+    else if (backgroundType === "custom") {
+
+        backgroundColor =
+            document.getElementById(
+                "customBackgroundColor"
+            ).value;
+
+        ctx.fillStyle = backgroundColor;
+
+        ctx.fillRect(
+            0,
+            0,
+            canvas.width,
+            canvas.height
+        );
+
+    }
+
+
+    else if (
+        backgroundType === "image" &&
+        backgroundImage
+    ) {
+
+        ctx.drawImage(
+            backgroundImage,
+            0,
+            0,
+            canvas.width,
+            canvas.height
+        );
+
+    }
+
+
+    /*
+       TRANSPARENT:
+       Nothing is drawn.
+    */
+
+
+    /* =========================
+       BLURRED BORDER BACKGROUND
+    ========================= */
+
+    if (blurBorderEnabled) {
+        ctx.save();
+        ctx.filter = `blur(${blurStrength}px)`;
+        ctx.drawImage(image, 0, 0, canvas.width, canvas.height);
+        ctx.filter = "none";
+        ctx.restore();
+    }
+
+
+    /* =========================
+       PHOTO
+    ========================= */
+
+    const padding = blurBorderEnabled
+        ? Math.min(canvas.width, canvas.height) * (blurBorderWidth / 100)
+        : 0;
+
+    const photoWidth = Math.max(1, width - padding * 2);
+    const photoHeight = Math.max(1, height - padding * 2);
+
+    ctx.save();
+
+
+    ctx.translate(
+        canvas.width / 2,
+        canvas.height / 2
+    );
+
+
+    ctx.rotate(radians);
+
+
+    ctx.scale(
+        flipX,
+        flipY
+    );
+
+
+    /* SHAPE */
+
+    createShape(
+        ctx,
+        photoWidth,
+        photoHeight
+    );
+
+
+    ctx.clip();
+
+
+    ctx.drawImage(
+        image,
+        -photoWidth / 2,
+        -photoHeight / 2,
+        photoWidth,
+        photoHeight
+    );
+
+
+    ctx.restore();
+
+
+    /* FRAME */
+
+    drawFrame();
+
+}
+
+
+/* =========================
+   SHAPES
+========================= */
+
+function createShape(
+    ctx,
+    width,
+    height
+) {
+
+    const shape =
+        selectedShape;
+
+
+    /* CIRCLE */
+
+    if (shape === "circle") {
+
+        const radius =
+            Math.min(
+                width,
+                height
+            ) / 2;
+
+
+        ctx.beginPath();
+
+
+        ctx.arc(
+            0,
+            0,
+            radius,
+            0,
+            Math.PI * 2
+        );
+
+
+        ctx.closePath();
+
+    }
+
+
+    /* ROUNDED */
+
+    else if (shape === "rounded") {
+
+        const radius =
+            Math.min(
+                40,
+                width / 4,
+                height / 4
+            );
+
+
+        ctx.beginPath();
+
+
+        ctx.roundRect(
+            -width / 2,
+            -height / 2,
+            width,
+            height,
+            radius
+        );
+
+    }
+
+
+    /* HEART */
+
+    else if (shape === "heart") {
+
+        ctx.beginPath();
+
+
+        ctx.moveTo(
+            0,
+            height * 0.35
+        );
+
+
+        ctx.bezierCurveTo(
+            -width * 0.6,
+            -height * 0.1,
+            -width * 0.5,
+            -height * 0.55,
+            0,
+            -height * 0.25
+        );
+
+
+        ctx.bezierCurveTo(
+            width * 0.5,
+            -height * 0.55,
+            width * 0.6,
+            -height * 0.1,
+            0,
+            height * 0.35
+        );
+
+
+        ctx.closePath();
+
+    }
+
+
+    /* HEXAGON */
+
+    else if (shape === "hexagon") {
+
+        polygon(
+            ctx,
+            6,
+            Math.min(
+                width,
+                height
+            ) / 2
+        );
+
+    }
+
+
+    /* DIAMOND */
+
+    else if (shape === "diamond") {
+
+        ctx.beginPath();
+
+
+        ctx.moveTo(
+            0,
+            -height / 2
+        );
+
+
+        ctx.lineTo(
+            width / 2,
+            0
+        );
+
+
+        ctx.lineTo(
+            0,
+            height / 2
+        );
+
+
+        ctx.lineTo(
+            -width / 2,
+            0
+        );
+
+
+        ctx.closePath();
+
+    }
+
+
+    /* STAR */
+
+    else if (shape === "star") {
+
+        star(
+            ctx,
+            5,
+            Math.min(
+                width,
+                height
+            ) / 2
+        );
+
+    }
+
+
+    /* RECTANGLE */
+
+    else {
+
+        ctx.beginPath();
+
+
+        ctx.rect(
+            -width / 2,
+            -height / 2,
+            width,
+            height
+        );
+
+    }
+
+}
+
+
+/* =========================
+   POLYGON
+========================= */
+
+function polygon(
+    ctx,
+    sides,
+    radius
+) {
+
+    ctx.beginPath();
+
+
+    for (
+        let i = 0;
+        i < sides;
+        i++
+    ) {
+
+        const angle =
+            (i * 2 * Math.PI / sides) -
+            Math.PI / 2;
+
+
+        const x =
+            Math.cos(angle) * radius;
+
+        const y =
+            Math.sin(angle) * radius;
+
+
+        if (i === 0) {
+
+            ctx.moveTo(
+                x,
+                y
+            );
+
+        } else {
+
+            ctx.lineTo(
+                x,
+                y
+            );
+
+        }
+
+    }
+
+
+    ctx.closePath();
+
+}
+
+
+/* =========================
+   STAR
+========================= */
+
+function star(
+    ctx,
+    points,
+    radius
+) {
+
+    ctx.beginPath();
+
+
+    const innerRadius =
+        radius * 0.45;
+
+
+    for (
+        let i = 0;
+        i < points * 2;
+        i++
+    ) {
+
+        const r =
+            i % 2 === 0
+                ? radius
+                : innerRadius;
+
+
+        const angle =
+            i * Math.PI / points -
+            Math.PI / 2;
+
+
+        const x =
+            Math.cos(angle) * r;
+
+        const y =
+            Math.sin(angle) * r;
+
+
+        if (i === 0) {
+
+            ctx.moveTo(
+                x,
+                y
+            );
+
+        } else {
+
+            ctx.lineTo(
+                x,
+                y
+            );
+
+        }
+
+    }
+
+
+    ctx.closePath();
+
+}
+
+
+/* =========================
+   FRAME
+========================= */
+
+function drawFrame() {
+
+    if (
+        selectedFrame === "none"
+    ) {
+
+        return;
+
+    }
+
+
+    ctx.save();
+
+
+    ctx.strokeStyle = "#222";
+
+
+    if (
+        selectedFrame === "simple"
+    ) {
+
+        ctx.lineWidth = 6;
+
+
+        ctx.strokeRect(
+            3,
+            3,
+            canvas.width - 6,
+            canvas.height - 6
+        );
+
+    }
+
+
+    else if (
+        selectedFrame === "thick"
+    ) {
+
+        ctx.lineWidth = 15;
+
+
+        ctx.strokeRect(
+            7,
+            7,
+            canvas.width - 14,
+            canvas.height - 14
+        );
+
+    }
+
+
+    else if (
+        selectedFrame === "double"
+    ) {
+
+        ctx.lineWidth = 5;
+
+
+        ctx.strokeRect(
+            5,
+            5,
+            canvas.width - 10,
+            canvas.height - 10
+        );
+
+
+        ctx.strokeRect(
+            15,
+            15,
+            canvas.width - 30,
+            canvas.height - 30
+        );
+
+    }
+
+
+    ctx.restore();
+
+}
+
+
+/* =========================
+   ROTATE
+========================= */
+
+function rotateLeft() {
+
+    rotation -= 90;
+
+    draw();
+
+    statusText.innerText =
+        "Photo rotated left.";
+
+}
+
+
+function rotateRight() {
+
+    rotation += 90;
+
+    draw();
+
+    statusText.innerText =
+        "Photo rotated right.";
+
+}
+
+
+/* =========================
+   FLIP
+========================= */
+
+function flipHorizontal() {
+
+    flipX *= -1;
+
+    draw();
+
+    statusText.innerText =
+        "Horizontal flip applied.";
+
+}
+
+
+function flipVertical() {
+
+    flipY *= -1;
+
+    draw();
+
+    statusText.innerText =
+        "Vertical flip applied.";
+
+}
+
+
+/* =========================
+   SHAPE
+========================= */
+
+function changeShape() {
+
+    selectedShape =
+        document.getElementById(
+            "shapeSelect"
+        ).value;
+
+
+    draw();
+
+
+    statusText.innerText =
+        "Photo shape changed.";
+
+}
+
+
+/* =========================
+   FRAME
+========================= */
+
+function changeFrame() {
+
+    selectedFrame =
+        document.getElementById(
+            "frameSelect"
+        ).value;
+
+
+    draw();
+
+
+    statusText.innerText =
+        "Frame changed.";
+
+}
+
+
+/* =========================
+   BLUR BORDER
+========================= */
+
+function changeBlurBorder() {
+    blurBorderEnabled = document.getElementById("blurBorderEnabled").checked;
+    draw();
+    statusText.innerText = blurBorderEnabled
+        ? "Blur border effect applied."
+        : "Blur border effect removed.";
+}
+
+function updateBlurBorder() {
+    blurStrength = Number(document.getElementById("blurStrength").value);
+    blurBorderWidth = Number(document.getElementById("blurBorderWidth").value);
+
+    document.getElementById("blurValue").innerText = blurStrength;
+    document.getElementById("blurBorderWidthValue").innerText = blurBorderWidth;
+
+    blurBorderEnabled = document.getElementById("blurBorderEnabled").checked;
+    draw();
+}
+
+
+/* =========================
+   SIZE
+========================= */
+
+function changeSize() {
+
+    const value =
+        document.getElementById(
+            "sizeSelect"
+        ).value;
+
+
+    const customBox =
+        document.getElementById(
+            "customSizeBox"
+        );
+
+
+    customBox.style.display =
+        value === "custom"
+            ? "block"
+            : "none";
+
+
+    if (
+        value === "original"
+    ) {
+
+        targetWidth = null;
+        targetHeight = null;
+
+    }
+
+
+    else if (
+        value === "passport"
+    ) {
+
+        /*
+           Approximate 35 × 45 mm
+        */
+
+        targetWidth = 700;
+        targetHeight = 900;
+
+    }
+
+
+    else if (
+        value === "square"
+    ) {
+
+        targetWidth = 800;
+        targetHeight = 800;
+
+    }
+
+
+    else if (
+        value === "profile"
+    ) {
+
+        targetWidth = 800;
+        targetHeight = 800;
+
+    }
+
+
+    draw();
+
+
+    statusText.innerText =
+        "Photo size changed.";
+
+}
+
+
+/* =========================
+   CUSTOM SIZE
+========================= */
+
+function applyCustomSize() {
+
+    const width =
+        parseInt(
+            document.getElementById(
+                "customWidth"
+            ).value
+        );
+
+
+    const height =
+        parseInt(
+            document.getElementById(
+                "customHeight"
+            ).value
+        );
+
+
+    if (
+        !width ||
+        !height ||
+        width <= 0 ||
+        height <= 0
+    ) {
+
+        alert(
+            "Please enter valid width and height."
+        );
+
+        return;
+
+    }
+
+
+    targetWidth = width;
+    targetHeight = height;
+
+
+    draw();
+
+
+    statusText.innerText =
+        "Custom size applied.";
+
+}
+
+
+/* =========================
+   BACKGROUND
+========================= */
+
+function changeBackground() {
+
+    backgroundType =
+        document.getElementById(
+            "backgroundType"
+        ).value;
+
+
+    const customBox =
+        document.getElementById(
+            "customColorBox"
+        );
+
+
+    if (
+        backgroundType === "custom"
+    ) {
+
+        customBox.style.display =
+            "block";
+
+
+        backgroundColor =
+            document.getElementById(
+                "customBackgroundColor"
+            ).value;
+
+    }
+
+    else {
+
+        customBox.style.display =
+            "none";
+
+    }
+
+
+    draw();
+
+
+    if (
+        backgroundType === "original"
+    ) {
+
+        statusText.innerText =
+            "Original background.";
+
+    }
+
+    else if (
+        backgroundType === "transparent"
+    ) {
+
+        statusText.innerText =
+            "Transparent background.";
+
+    }
+
+    else {
+
+        statusText.innerText =
+            "Background changed.";
+
+    }
+
+}
+
+
+/* =========================
+   BACKGROUND IMAGE
+========================= */
+
+function loadBackgroundImage(event) {
+
+    const file =
+        event.target.files[0];
+
+
+    if (!file) {
+        return;
+    }
+
+
+    const reader =
+        new FileReader();
+
+
+    reader.onload =
+        function (e) {
+
+            const bg =
+                new Image();
+
+
+            bg.onload =
+                function () {
+
+                    backgroundImage = bg;
+
+                    backgroundType =
+                        "image";
+
+
+                    document.getElementById(
+                        "backgroundType"
+                    ).value =
+                        "original";
+
+
+                    draw();
+
+
+                    statusText.innerText =
+                        "Background image applied.";
+
+                };
+
+
+            bg.src =
+                e.target.result;
+
+        };
+
+
+    reader.readAsDataURL(file);
+
+}
+
+
+/* =========================
+   REMOVE BACKGROUND IMAGE
+========================= */
+
+function removeBackgroundImage() {
+
+    backgroundImage = null;
+
+    backgroundType = "original";
+
+
+    document.getElementById(
+        "backgroundType"
+    ).value =
+        "original";
+
+
+    document.getElementById(
+        "backgroundImageInput"
+    ).value =
+        "";
+
+
+    draw();
+
+
+    statusText.innerText =
+        "Background image removed.";
+
+}
+
+
+/* =========================
+   QUALITY
+========================= */
+
+function updateQuality() {
+
+    quality =
+        document.getElementById(
+            "quality"
+        ).value / 100;
+
+
+    document.getElementById(
+        "qualityValue"
+    ).innerText =
+        Math.round(
+            quality * 100
+        );
+
+}
+
+
+/* =========================
+   RESIZE
+========================= */
+
+function updateResize() {
+
+    resizePercent =
+        document.getElementById(
+            "resize"
+        ).value / 100;
+
+
+    document.getElementById(
+        "resizeValue"
+    ).innerText =
+        Math.round(
+            resizePercent * 100
+        );
+
+
+    draw();
+
+}
+
+
+/* =========================
+   RESET
+========================= */
+
+function resetEditor() {
+
+    rotation = 0;
+
+    flipX = 1;
+    flipY = 1;
+
+
+    selectedShape =
+        "rectangle";
+
+
+    selectedFrame =
+        "none";
+
+    blurBorderEnabled = false;
+    blurStrength = 12;
+    blurBorderWidth = 15;
+
+    document.getElementById("blurBorderEnabled").checked = false;
+    document.getElementById("blurStrength").value = 12;
+    document.getElementById("blurBorderWidth").value = 15;
+    document.getElementById("blurValue").innerText = "12";
+    document.getElementById("blurBorderWidthValue").innerText = "15";
+
+
+    targetWidth = null;
+    targetHeight = null;
+
+
+    resizePercent = 1;
+
+    quality = 0.9;
+
+
+    backgroundType =
+        "original";
+
+
+    backgroundColor =
+        "#ffffff";
+
+
+    backgroundImage =
+        null;
+
+
+    document.getElementById(
+        "shapeSelect"
+    ).value =
+        "rectangle";
+
+
+    document.getElementById(
+        "frameSelect"
+    ).value =
+        "none";
+
+
+    document.getElementById(
+        "sizeSelect"
+    ).value =
+        "original";
+
+
+    document.getElementById(
+        "backgroundType"
+    ).value =
+        "original";
+
+
+    document.getElementById(
+        "backgroundImageInput"
+    ).value =
+        "";
+
+
+    document.getElementById(
+        "customColorBox"
+    ).style.display =
+        "none";
+
+
+    document.getElementById(
+        "resize"
+    ).value =
+        100;
+
+
+    document.getElementById(
+        "quality"
+    ).value =
+        90;
+
+
+    document.getElementById(
+        "resizeValue"
+    ).innerText =
+        "100";
+
+
+    document.getElementById(
+        "qualityValue"
+    ).innerText =
+        "90";
+
+
+    draw();
+
+
+    statusText.innerText =
+        "Editor reset.";
+
+}
+
+
+/* =========================
+   DOWNLOAD
+========================= */
+
+function downloadPhoto() {
+
+    if (!image.src) {
+
+        alert(
+            "Please upload a photo first."
+        );
+
+        return;
+
+    }
+
+
+    const link =
+        document.createElement("a");
+
+
+    link.download =
+        "HB Innovations-Edited-Photo.jpg";
+
+
+    /*
+       If transparent background is selected,
+       PNG is better than JPG.
+    */
+
+    if (
+        backgroundType === "transparent"
+    ) {
+
+        link.download =
+            "HB Innovations-Edited-Photo.png";
+
+
+        link.href =
+            canvas.toDataURL(
+                "image/png"
+            );
+
+    }
+
+    else {
+
+        link.download =
+            "HB Innovations-Edited-Photo.jpg";
+
+
+        link.href =
+            canvas.toDataURL(
+                "image/jpeg",
+                quality
+            );
+
+    }
+
+
+    link.click();
+
+
+    statusText.innerText =
+        "Photo downloaded successfully.";
+
+}
+
+</script>
+
+</body>
+</html>
