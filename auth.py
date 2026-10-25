@@ -81,3 +81,9 @@ def login():
         return redirect(url_for("auth.login"))
 
     return render_template("login.html")
+
+@auth.route("/logout")
+def logout():
+    session.clear()
+    return redirect(url_for("auth.login"))
+

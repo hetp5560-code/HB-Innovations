@@ -13,6 +13,7 @@ from resume import resume
 from photo_editor import photo_editor
 from birthday import birthday
 from collage import collage  # NEW: Collage Maker blueprint
+from functools import wraps
 
 
 app = Flask(__name__)
@@ -48,6 +49,13 @@ app.register_blueprint(photo_editor)
 app.register_blueprint(birthday)
 app.register_blueprint(collage)  # NEW: register Collage Maker
 
+def login_required(view_function):
+    @wraps(view_function)
+    def wrapped_view(*args, **kwargs):
+        if "user_id" not in session:
+            return redirect("/login")
+        return view_function(*args, **kwargs)
+    return wrapped_view
 
 # Home Page
 @app.route("/")

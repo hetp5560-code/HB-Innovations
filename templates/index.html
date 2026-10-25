@@ -1,476 +1,722 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>HB Innovations | Build Your Professional CV</title>
+    <title>HB Innovations | Creative Studio</title>
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
 
-    <link rel="stylesheet"
-          href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        :root {
+            --purple: #7657ff;
+            --pink: #ed62b8;
+            --dark: #171426;
+            --muted: #aaa5bf;
+            --card: #211d35;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            color: #fff;
+            background: #141120;
+            font-family: "Segoe UI", Arial, sans-serif;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .custom-navbar {
+            background: rgba(20, 17, 32, .96);
+            border-bottom: 1px solid rgba(255,255,255,.08);
+            padding: 16px 0;
+        }
+
+        .brand-logo {
+            color: #fff !important;
+            font-size: 23px;
+            font-weight: 800;
+        }
+
+        .logo-icon {
+            display: inline-flex;
+            width: 43px;
+            height: 43px;
+            margin-right: 8px;
+            align-items: center;
+            justify-content: center;
+            border-radius: 13px;
+            background: linear-gradient(135deg, var(--purple), var(--pink));
+            color: white;
+            font-size: 16px;
+        }
+
+        .brand-logo span:last-child {
+            color: #c1b4ff;
+        }
+
+        .nav-link-custom {
+            color: #d5d0e8;
+            margin-right: 22px;
+        }
+
+        .nav-link-custom:hover {
+            color: white;
+        }
+
+        .btn-register,
+        .btn-start {
+            border: 0;
+            border-radius: 12px;
+            padding: 12px 22px;
+            color: white;
+            background: linear-gradient(135deg, var(--purple), var(--pink));
+            font-weight: 700;
+        }
+
+        .btn-register:hover,
+        .btn-start:hover {
+            color: white;
+            opacity: .9;
+            transform: translateY(-2px);
+        }
+
+        .hero-section {
+            position: relative;
+            overflow: hidden;
+            padding: 90px 0 80px;
+            background:
+                radial-gradient(ellipse at 15% 15%, rgba(118,87,255,.22), transparent 40%),
+                radial-gradient(ellipse at 90% 70%, rgba(237,98,184,.15), transparent 35%);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+        }
+
+        .small-badge {
+            display: inline-block;
+            margin-bottom: 22px;
+            padding: 9px 15px;
+            border: 1px solid rgba(180,154,255,.35);
+            border-radius: 50px;
+            background: rgba(118,87,255,.12);
+            color: #d2c5ff;
+            font-size: 13px;
+            font-weight: 700;
+        }
+
+        .hero-content h1 {
+            max-width: 650px;
+            font-size: clamp(42px, 5vw, 68px);
+            font-weight: 850;
+            line-height: 1.12;
+            letter-spacing: -2px;
+        }
+
+        .hero-content h1 span {
+            display: block;
+            color: #bd9cff;
+            background: linear-gradient(90deg, #b69aff, #ff91d6);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-text {
+            max-width: 570px;
+            margin: 25px 0;
+            color: var(--muted);
+            font-size: 17px;
+            line-height: 1.8;
+        }
+
+        .hero-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 13px;
+        }
+
+        .btn-login {
+            padding: 12px 25px;
+            border: 1px solid rgba(255,255,255,.2);
+            border-radius: 12px;
+            color: white;
+        }
+
+        .btn-login:hover {
+            background: rgba(255,255,255,.08);
+            color: white;
+        }
+
+        .hero-stats {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 38px;
+            margin-top: 42px;
+        }
+
+        .hero-stats strong {
+            display: block;
+            font-size: 22px;
+        }
+
+        .hero-stats small {
+            color: var(--muted);
+        }
+
+        .hero-preview {
+            position: relative;
+            max-width: 440px;
+            margin: 25px auto;
+            padding: 27px;
+            border: 1px solid rgba(255,255,255,.13);
+            border-radius: 28px;
+            background: rgba(36,30,57,.8);
+            box-shadow: 0 25px 80px rgba(0,0,0,.25);
+            transform: rotate(2deg);
+        }
+
+        .preview-top {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .preview-logo {
+            display: flex;
+            width: 65px;
+            height: 65px;
+            align-items: center;
+            justify-content: center;
+            border-radius: 20px;
+            background: linear-gradient(135deg, var(--purple), var(--pink));
+            font-size: 27px;
+        }
+
+        .preview-top h3 {
+            margin: 0 0 5px;
+            font-size: 20px;
+        }
+
+        .preview-top p {
+            margin: 0;
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .preview-tool {
+            display: flex;
+            align-items: center;
+            gap: 13px;
+            margin-top: 12px;
+            padding: 15px;
+            border: 1px solid rgba(255,255,255,.06);
+            border-radius: 15px;
+            background: rgba(255,255,255,.035);
+        }
+
+        .preview-tool i {
+            color: #c3a5ff;
+            font-size: 24px;
+        }
+
+        .preview-tool strong {
+            display: block;
+            font-size: 14px;
+        }
+
+        .preview-tool small {
+            color: var(--muted);
+        }
+
+        .section {
+            padding: 80px 0;
+        }
+
+        .section-heading {
+            max-width: 720px;
+            margin: 0 auto 45px;
+            text-align: center;
+        }
+
+        .section-heading h2 {
+            margin-bottom: 15px;
+            font-size: clamp(30px, 4vw, 43px);
+            font-weight: 800;
+        }
+
+        .section-heading p {
+            color: var(--muted);
+            line-height: 1.8;
+        }
+
+        .gradient-text {
+            color: #c3a8ff;
+        }
+
+        .tool-card {
+            position: relative;
+            display: flex;
+            height: 100%;
+            flex-direction: column;
+            padding: 25px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,.09);
+            border-radius: 22px;
+            background: linear-gradient(145deg, #242039, #1b182b);
+            transition: .25s ease;
+        }
+
+        .tool-card:hover {
+            transform: translateY(-7px);
+            border-color: rgba(177,139,255,.65);
+            box-shadow: 0 18px 40px rgba(0,0,0,.2);
+        }
+
+        .tool-icon {
+            display: flex;
+            width: 58px;
+            height: 58px;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 22px;
+            border-radius: 17px;
+            background: linear-gradient(135deg, rgba(118,87,255,.25), rgba(237,98,184,.18));
+            color: #d1b9ff;
+            font-size: 27px;
+        }
+
+        .tool-card h3 {
+            margin-bottom: 12px;
+            font-size: 21px;
+            font-weight: 750;
+        }
+
+        .tool-card p {
+            flex-grow: 1;
+            color: var(--muted);
+            font-size: 14px;
+            line-height: 1.8;
+        }
+
+        .tool-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            margin-top: 15px;
+            color: #c7b3ff;
+            font-weight: 700;
+        }
+
+        .tool-link:hover {
+            color: #ff9ddd;
+        }
+
+        .tool-label {
+            display: inline-block;
+            align-self: flex-start;
+            margin-bottom: 14px;
+            padding: 5px 10px;
+            border-radius: 20px;
+            background: rgba(118,87,255,.13);
+            color: #cdbbff;
+            font-size: 11px;
+            font-weight: 700;
+        }
+
+        .steps-section {
+            background: #191628;
+        }
+
+        .step-card {
+            height: 100%;
+            padding: 28px;
+            border: 1px solid rgba(255,255,255,.08);
+            border-radius: 20px;
+            background: #211d32;
+        }
+
+        .step-number {
+            margin-bottom: 18px;
+            color: #b99aff;
+            font-size: 34px;
+            font-weight: 850;
+        }
+
+        .step-card h4 {
+            margin-bottom: 12px;
+            font-weight: 750;
+        }
+
+        .step-card p {
+            margin-bottom: 0;
+            color: var(--muted);
+            line-height: 1.8;
+        }
+
+        .cta-box {
+            padding: 55px 25px;
+            border: 1px solid rgba(255,255,255,.12);
+            border-radius: 28px;
+            background:
+                radial-gradient(ellipse at top left, rgba(118,87,255,.27), transparent 50%),
+                linear-gradient(135deg, #27203f, #261b34);
+            text-align: center;
+        }
+
+        .cta-box h2 {
+            margin-bottom: 15px;
+            font-size: clamp(28px, 4vw, 40px);
+            font-weight: 850;
+        }
+
+        .cta-box p {
+            margin-bottom: 25px;
+            color: var(--muted);
+        }
+
+        .footer {
+            padding: 35px 0 20px;
+            border-top: 1px solid rgba(255,255,255,.08);
+            background: #100e1b;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            gap: 25px;
+        }
+
+        .footer h4 {
+            font-weight: 800;
+        }
+
+        .footer p,
+        .footer-bottom {
+            color: var(--muted);
+            font-size: 13px;
+        }
+
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px;
+        }
+
+        .footer-links a {
+            color: #d3cde5;
+        }
+
+        .footer-bottom {
+            margin-top: 25px;
+            padding-top: 18px;
+            border-top: 1px solid rgba(255,255,255,.07);
+            text-align: center;
+        }
+
+        @media (max-width: 767px) {
+            .hero-section {
+                padding: 60px 0;
+            }
+
+            .hero-content h1 {
+                letter-spacing: -1px;
+            }
+
+            .hero-stats {
+                gap: 22px;
+            }
+
+            .section {
+                padding: 60px 0;
+            }
+
+            .footer-content {
+                flex-direction: column;
+            }
+        }
+    </style>
 </head>
 
 <body>
 
-<!-- ================= NAVBAR ================= -->
-
+<!-- NAVBAR -->
 <nav class="navbar navbar-expand-lg custom-navbar">
     <div class="container">
-
         <a class="navbar-brand brand-logo" href="/">
             <span class="logo-icon">HB</span>
-            HB Innovations <span>Designer</span>
+            HB Innovations <span>Studio</span>
         </a>
 
-        <div class="navbar-buttons">
-            <a href="/" class="nav-link-custom">Home</a>
-
-            <a href="/register" class="btn btn-register">
-                Register
-            </a>
+        <div class="navbar-buttons d-flex align-items-center gap-3">
+            <a href="#home" class="nav-link-custom d-none d-md-inline">Home</a>
+            <a href="#tools" class="nav-link-custom d-none d-md-inline">Our Tools</a>
+            <a href="/login" class="nav-link-custom">Login</a>
+            <a href="/register" class="btn btn-register">Get Started <i class="bi bi-arrow-right"></i></a>
         </div>
-
     </div>
 </nav>
 
-
-<!-- ================= HERO SECTION ================= -->
-
-<section class="hero-section">
-
-    <!-- Background decorations -->
-    <div class="glow glow-one"></div>
-    <div class="glow glow-two"></div>
-
+<!-- HERO -->
+<section class="hero-section" id="home">
     <div class="container">
-
-        <div class="row align-items-center min-vh-75">
-
-            <!-- LEFT SIDE -->
-
-            <div class="col-lg-6 hero-content">
-
+        <div class="row align-items-center">
+            <div class="col-lg-7 hero-content">
                 <div class="small-badge">
-                    ✨ Smart Resume Builder
+                    <i class="bi bi-stars"></i> YOUR ALL-IN-ONE CREATIVE STUDIO
                 </div>
 
                 <h1>
-                    Create Your
-                    <span>Professional CV</span>
-                    In Minutes.
+                    Make Your Ideas
+                    <span>Look Extraordinary.</span>
                 </h1>
 
                 <p class="hero-text">
-                    Build a professional resume easily with HB Innovations.
-                    Add your information once and create beautiful,
-                    job-ready CV designs instantly.
+                    Create professional resumes, edit photos, design birthday cards,
+                    build beautiful collages and explore more creative tools — all
+                    in one place with HB Innovations.
                 </p>
 
                 <div class="hero-buttons">
-
                     <a href="/register" class="btn btn-start">
-                        Create My CV
-                        <span>→</span>
+                        Explore All Tools <i class="bi bi-arrow-right"></i>
                     </a>
-
                     <a href="/login" class="btn btn-login">
-                        Login
+                        <i class="bi bi-person-circle"></i> Login to Continue
                     </a>
-
                 </div>
 
                 <div class="hero-stats">
-
+                    <div>
+                        <strong>11+</strong>
+                        <small>Useful Tools</small>
+                    </div>
                     <div>
                         <strong>Easy</strong>
                         <small>To Use</small>
                     </div>
-
                     <div>
-                        <strong>Fast</strong>
-                        <small>CV Creation</small>
+                        <strong>One</strong>
+                        <small>Creative Platform</small>
                     </div>
-
-                    <div>
-                        <strong>Modern</strong>
-                        <small>Templates</small>
-                    </div>
-
                 </div>
-
             </div>
 
-
-            <!-- RIGHT SIDE CV PREVIEW -->
-
-            <div class="col-lg-6">
-
-                <div class="cv-area">
-
-                    <div class="floating-tag tag-one">
-                        ✓ Professional
-                    </div>
-
-                    <div class="floating-tag tag-two">
-                        ✦ Modern Design
-                    </div>
-
-                    <div class="cv-card">
-
-                        <div class="cv-top">
-
-                            <div class="cv-avatar">
-                                H
-                            </div>
-
-                            <div>
-                                <h3>YOUR NAME</h3>
-                                <p>Software Developer</p>
-                            </div>
-
+            <div class="col-lg-5">
+                <div class="hero-preview">
+                    <div class="preview-top">
+                        <div class="preview-logo"><i class="bi bi-magic"></i></div>
+                        <div>
+                            <h3>HB Creative Studio</h3>
+                            <p>Your ideas, your creativity.</p>
                         </div>
-
-                        <div class="cv-line"></div>
-
-                        <div class="cv-body">
-
-                            <div class="cv-sidebar">
-
-                                <div class="cv-heading">
-                                    CONTACT
-                                </div>
-
-                                <div class="cv-small-line"></div>
-                                <div class="cv-small-line"></div>
-                                <div class="cv-small-line"></div>
-
-                                <div class="cv-heading mt-4">
-                                    SKILLS
-                                </div>
-
-                                <div class="skill">
-                                    <span></span>
-                                </div>
-
-                                <div class="skill">
-                                    <span></span>
-                                </div>
-
-                                <div class="skill">
-                                    <span></span>
-                                </div>
-
-                            </div>
-
-                            <div class="cv-main">
-
-                                <div class="cv-heading">
-                                    PROFILE
-                                </div>
-
-                                <div class="cv-text"></div>
-                                <div class="cv-text"></div>
-                                <div class="cv-text short"></div>
-
-                                <div class="cv-heading mt-4">
-                                    EXPERIENCE
-                                </div>
-
-                                <div class="experience-box">
-                                    <strong>Software Developer</strong>
-                                    <small>2024 - Present</small>
-
-                                    <div class="cv-text"></div>
-                                    <div class="cv-text"></div>
-                                </div>
-
-                                <div class="cv-heading mt-4">
-                                    EDUCATION
-                                </div>
-
-                                <div class="experience-box">
-                                    <strong>Bachelor's Degree</strong>
-                                    <small>2021 - 2025</small>
-                                </div>
-
-                            </div>
-
-                        </div>
-
                     </div>
 
+                    <div class="preview-tool">
+                        <i class="bi bi-file-earmark-person"></i>
+                        <div>
+                            <strong>Resume Builder</strong>
+                            <small>Create a professional CV</small>
+                        </div>
+                    </div>
+
+                    <div class="preview-tool">
+                        <i class="bi bi-image"></i>
+                        <div>
+                            <strong>Photo Studio</strong>
+                            <small>Make your photos look better</small>
+                        </div>
+                    </div>
+
+                    <div class="preview-tool">
+                        <i class="bi bi-balloon-heart"></i>
+                        <div>
+                            <strong>Birthday Card Maker</strong>
+                            <small>Create cards for special moments</small>
+                        </div>
+                    </div>
+
+                    <div class="preview-tool">
+                        <i class="bi bi-grid-3x3-gap"></i>
+                        <div>
+                            <strong>Collage Maker</strong>
+                            <small>Bring your memories together</small>
+                        </div>
+                    </div>
                 </div>
-
             </div>
-
         </div>
-
     </div>
-
 </section>
 
-
-<!-- ================= FEATURES ================= -->
-
-<section class="features-section">
-
+<!-- TOOLS -->
+<!-- TOOLS SECTION -->
+<section class="section" id="tools">
     <div class="container">
 
-        <div class="section-title">
-
-            <div class="small-badge">
-                ⚡ Why HB Innovations?
-            </div>
-
-            <h2>
-                Everything You Need To Build A Better CV
-            </h2>
-
-            <p>
-                Simple tools designed to help you create a professional
-                resume without complicated steps.
-            </p>
-
+        <div class="section-heading">
+            <div class="small-badge">✨ EXPLORE OUR TOOLS</div>
+            <h2>Everything You Need, <span class="gradient-text">In One Place</span></h2>
+            <p>Choose your favourite tool and start creating!</p>
         </div>
-
 
         <div class="row g-4">
 
+            <!-- Resume Builder -->
             <div class="col-md-6 col-lg-3">
-
-                <div class="feature-card">
-
-                    <div class="feature-icon">
-                        📝
+                <div class="tool-card">
+                    <div class="tool-icon">
+                        <i class="bi bi-file-earmark-person"></i>
                     </div>
-
-                    <h4>Easy Input</h4>
-
-                    <p>
-                        Enter your personal and professional information
-                        through simple forms.
-                    </p>
-
+                    <span class="tool-label">CAREER</span>
+                    <h3>Resume Builder</h3>
+                    <p>Create a professional resume with your personal details, education, skills and experience.</p>
+                    <a class="tool-link" href="/resume">
+                        Open Tool <i class="bi bi-arrow-up-right"></i>
+                    </a>
                 </div>
-
             </div>
 
-
+            <!-- Photo Studio -->
             <div class="col-md-6 col-lg-3">
-
-                <div class="feature-card">
-
-                    <div class="feature-icon">
-                        🎨
+                <div class="tool-card">
+                    <div class="tool-icon">
+                        <i class="bi bi-camera"></i>
                     </div>
-
-                    <h4>Modern Design</h4>
-
-                    <p>
-                        Create clean and professional resumes with
-                        attractive designs.
-                    </p>
-
+                    <span class="tool-label">PHOTOGRAPHY</span>
+                    <h3>Photo Studio</h3>
+                    <p>Edit your photos and make your images look better with our photo editor.</p>
+                    <a class="tool-link" href="/photo-editor">
+                        Open Tool <i class="bi bi-arrow-up-right"></i>
+                    </a>
                 </div>
-
             </div>
 
-
+            <!-- Birthday Card Maker -->
             <div class="col-md-6 col-lg-3">
-
-                <div class="feature-card">
-
-                    <div class="feature-icon">
-                        ⚡
+                <div class="tool-card">
+                    <div class="tool-icon">
+                        <i class="bi bi-balloon-heart"></i>
                     </div>
-
-                    <h4>Quick Creation</h4>
-
-                    <p>
-                        Add your information once and generate your CV
-                        quickly.
-                    </p>
-
+                    <span class="tool-label">CELEBRATIONS</span>
+                    <h3>Birthday Card Maker</h3>
+                    <p>Create beautiful birthday cards for your friends and family.</p>
+                    <a class="tool-link" href="/birthday">
+                        Open Tool <i class="bi bi-arrow-up-right"></i>
+                    </a>
                 </div>
-
             </div>
 
-
+            <!-- Image Collage Maker -->
             <div class="col-md-6 col-lg-3">
-
-                <div class="feature-card">
-
-                    <div class="feature-icon">
-                        🚀
+                <div class="tool-card">
+                    <div class="tool-icon">
+                        <i class="bi bi-grid-3x3-gap"></i>
                     </div>
-
-                    <h4>Career Ready</h4>
-
-                    <p>
-                        Create a professional CV ready for your next
-                        job opportunity.
-                    </p>
-
+                    <span class="tool-label">MEMORIES</span>
+                    <h3>Image Collage Maker</h3>
+                    <p>Combine your favourite pictures and create a beautiful photo collage.</p>
+                    <a class="tool-link" href="/collage">
+                        Open Tool <i class="bi bi-arrow-up-right"></i>
+                    </a>
                 </div>
-
             </div>
 
         </div>
-
     </div>
-
 </section>
 
-
-<!-- ================= HOW IT WORKS ================= -->
-
-<section class="steps-section">
-
+<!-- HOW IT WORKS -->
+<section class="section steps-section">
     <div class="container">
-
-        <div class="section-title">
-
-            <div class="small-badge">
-                🚀 Simple Process
-            </div>
-
-            <h2>
-                Create Your CV In 3 Steps
-            </h2>
-
+        <div class="section-heading">
+            <div class="small-badge">🚀 GET STARTED</div>
+            <h2>Three Simple Steps</h2>
+            <p>Start using HB Innovations in just a few simple steps.</p>
         </div>
-
 
         <div class="row g-4">
-
             <div class="col-md-4">
-
                 <div class="step-card">
-
-                    <div class="step-number">
-                        01
-                    </div>
-
-                    <h4>Enter Your Details</h4>
-
-                    <p>
-                        Add your personal information, education,
-                        skills and experience.
-                    </p>
-
+                    <div class="step-number">01</div>
+                    <h4>Create Your Account</h4>
+                    <p>Register with your details to access the platform.</p>
                 </div>
-
             </div>
 
-
             <div class="col-md-4">
-
                 <div class="step-card">
-
-                    <div class="step-number">
-                        02
-                    </div>
-
-                    <h4>Customize Your CV</h4>
-
-                    <p>
-                        Organize your information and select your
-                        preferred resume design.
-                    </p>
-
+                    <div class="step-number">02</div>
+                    <h4>Choose Your Tool</h4>
+                    <p>Select a resume, photo, birthday card, collage or another available tool.</p>
                 </div>
-
             </div>
 
-
             <div class="col-md-4">
-
                 <div class="step-card">
-
-                    <div class="step-number">
-                        03
-                    </div>
-
-                    <h4>Build Your Resume</h4>
-
-                    <p>
-                        Preview your professional CV and get ready
-                        for your next opportunity.
-                    </p>
-
+                    <div class="step-number">03</div>
+                    <h4>Start Creating</h4>
+                    <p>Log in and use your selected tool from your creative workspace.</p>
                 </div>
-
             </div>
-
         </div>
-
     </div>
-
 </section>
 
-
-<!-- ================= CTA ================= -->
-
-<section class="cta-section">
-
+<!-- CALL TO ACTION -->
+<section class="section">
     <div class="container">
-
         <div class="cta-box">
-
-            <h2>
-                Ready To Build Your Professional CV?
-            </h2>
-
-            <p>
-                Start creating your resume today with HB Innovations.
-            </p>
-
+            <div class="small-badge">YOUR CREATIVITY STARTS HERE</div>
+            <h2>Ready to Create Something Amazing?</h2>
+            <p>Join HB Innovations and explore your creative tools.</p>
             <a href="/register" class="btn btn-start">
-                Start Building →
+                Create Your Account <i class="bi bi-arrow-right"></i>
             </a>
-
         </div>
-
     </div>
-
 </section>
 
-
-<!-- ================= FOOTER ================= -->
-
+<!-- FOOTER -->
 <footer class="footer">
-
     <div class="container">
-
         <div class="footer-content">
-
             <div>
-                <h4>HB Innovations</h4>
-                <p>
-                    Create professional resumes easily and quickly.
-                </p>
+                <h4><span class="logo-icon">HB</span> HB Innovations</h4>
+                <p>Your all-in-one creative studio.</p>
             </div>
 
-            <div>
+            <div class="footer-links">
                 <a href="/">Home</a>
+                <a href="#tools">Our Tools</a>
                 <a href="/register">Register</a>
                 <a href="/login">Login</a>
             </div>
-
         </div>
 
         <div class="footer-bottom">
             © 2026 HB Innovations. All Rights Reserved.
         </div>
-
     </div>
-
 </footer>
 
-
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
-
 </body>
 </html>
+
