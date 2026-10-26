@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Collage Maker | HB Innovations</title>
+<title>Collage Maker | AutoCV Designer</title>
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
@@ -12,7 +12,8 @@
 *{box-sizing:border-box}body{margin:0;font-family:Poppins,sans-serif;background:radial-gradient(ellipse at 10% 0%,#eee7ff 0,transparent 34%),#f8f7fc;color:var(--ink)}
 .topbar{display:flex;align-items:center;justify-content:space-between;padding:16px 4.5%;background:#ffffffed;backdrop-filter:blur(14px);border-bottom:1px solid #ece7f5;gap:16px;position:sticky;top:0;z-index:20}.brand{font-size:21px;font-weight:800;margin:0;letter-spacing:-.6px}.brand span{background:linear-gradient(100deg,var(--primary),var(--primary2));-webkit-background-clip:text;background-clip:text;color:transparent}.sub{font-size:12px;color:var(--muted);margin:3px 0 0}.back{color:#44395f;text-decoration:none;font-weight:600;font-size:13px;padding:10px 14px;border:1px solid var(--line);border-radius:12px;background:white}.back:hover{background:var(--soft);color:var(--primary)}
 .page{max-width:1500px;margin:28px auto;padding:0 22px}.hero{display:flex;justify-content:space-between;align-items:center;gap:20px;margin-bottom:24px;padding:27px 30px;border-radius:24px;color:white;background:linear-gradient(115deg,#3e247f 0%,#7048e8 53%,#cb5acb 100%);box-shadow:0 18px 45px #7048e82b;position:relative;overflow:hidden}.hero:after{content:'✦';position:absolute;right:17%;top:-35px;font-size:180px;color:#ffffff13;transform:rotate(18deg)}.hero h1{font-size:clamp(25px,3vw,37px);font-weight:800;margin:0;letter-spacing:-1px;position:relative;z-index:1}.hero p{margin:8px 0 0;color:#eee7ff;font-size:13px;position:relative;z-index:1}.hero .badge{background:#ffffff20!important;color:#fff!important;border-color:#ffffff55!important;position:relative;z-index:1;white-space:nowrap}
-.layout{display:grid;grid-template-columns:minmax(0,1fr) 390px;gap:22px;align-items:start}.panel{background:#ffffff;border:1px solid #ece7f5;border-radius:22px;padding:21px;box-shadow:var(--shadow)}.preview-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;gap:10px}.preview-head h3,.section-title{font-size:15px;font-weight:750;margin:0}.preview-head h3 i{background:#f0eaff;padding:8px;border-radius:10px}.preview-wrap{min-height:540px;border-radius:17px;background-color:#f3f0fa;background-image:radial-gradient(#d7cfea 1px,transparent 1px);background-size:17px 17px;display:flex;align-items:center;justify-content:center;padding:22px;overflow:hidden;border:1px solid #eee8f8}#collageCanvas{display:block;max-width:100%;max-height:72vh;object-fit:contain;box-shadow:0 14px 35px #21123830;background:white;border-radius:3px}.empty{color:#8d879f;text-align:center;padding:50px 20px}.empty i{font-size:55px;color:#9b7bf2}.empty h4{font-size:17px;font-weight:700;margin-top:14px}.empty p{font-size:13px}
+.layout{display:grid;grid-template-columns:minmax(0,1fr) 390px;gap:22px;align-items:start}.panel{background:#ffffff;border:1px solid #ece7f5;border-radius:22px;padding:21px;box-shadow:var(--shadow)}.preview-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;gap:10px}.preview-head h3,.section-title{font-size:15px;font-weight:750;margin:0}.preview-head h3 i{background:#f0eaff;padding:8px;border-radius:10px}#collageCanvas{max-width:100%;height:auto;touch-action:none;cursor:grab}#collageCanvas.dragging{cursor:grabbing}.edit-help{font-size:12px;color:var(--muted);background:#f7f4ff;border:1px solid var(--line);border-radius:12px;padding:11px 13px;margin-top:12px}.edit-help strong{color:var(--primary)}
+.preview-wrap{min-height:540px;border-radius:17px;background-color:#f3f0fa;background-image:radial-gradient(#d7cfea 1px,transparent 1px);background-size:17px 17px;display:flex;align-items:center;justify-content:center;padding:22px;overflow:hidden;border:1px solid #eee8f8}#collageCanvas{display:block;max-width:100%;max-height:72vh;object-fit:contain;box-shadow:0 14px 35px #21123830;background:white;border-radius:3px}.empty{color:#8d879f;text-align:center;padding:50px 20px}.empty i{font-size:55px;color:#9b7bf2}.empty h4{font-size:17px;font-weight:700;margin-top:14px}.empty p{font-size:13px}
 .control{background:linear-gradient(140deg,#fff,#fcfbff);border:1px solid #eee9f7;border-radius:16px;padding:16px;margin-bottom:13px}.control label,.label{font-size:12px;font-weight:700;margin-bottom:8px;display:block}.form-control,.form-select{font-size:13px;border-color:#e5e0f0;border-radius:10px}.form-control:focus,.form-select:focus{border-color:#a38af6;box-shadow:0 0 0 .2rem #7048e81c}.small-note{font-size:11px;color:var(--muted);margin-top:6px}.btn-purple{background:linear-gradient(100deg,var(--primary),#9258ec);color:white;border:0;box-shadow:0 7px 18px #7048e82c}.btn-purple:hover{background:linear-gradient(100deg,#5a31d0,#8145dc);color:white;transform:translateY(-1px)}.btn-outline-purple{border:1px solid #d8cffc;color:var(--primary);background:white}.btn-outline-purple:hover{background:#f0ebff;color:var(--primary)}
 .photo-list{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}.photo-chip{font-size:10px;padding:6px 9px;border-radius:9px;background:#efebff;color:#5638bd;max-width:100%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.template-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;max-height:440px;overflow-y:auto;padding:2px 3px 5px 2px}.template-card{border:1px solid #e8e3f1;border-radius:12px;background:white;padding:8px;cursor:pointer;text-align:left;transition:.2s;min-width:0}.template-card:hover{transform:translateY(-3px);border-color:#b8a7ff;box-shadow:0 8px 20px #5c3aa51a}.template-card.active{border:2px solid var(--primary);padding:7px;box-shadow:0 0 0 3px #7048e81a;background:#faf8ff}.mini{height:76px;display:grid;gap:3px;overflow:hidden;border-radius:7px;background:#f0eef7;position:relative}.mini:after{content:'';position:absolute;inset:4px;border:1px solid #ffffff8a;border-radius:3px;pointer-events:none}.template-name{font-size:10px;font-weight:700;display:block;margin-top:7px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}.template-num{font-size:9px;color:#8b879b;display:block;margin-top:2px}.range-row{display:flex;justify-content:space-between;font-size:11px;color:var(--muted);margin-bottom:5px}.actions{display:flex;gap:8px;flex-wrap:wrap}.actions .btn{font-size:12px;font-weight:650;padding:10px 14px;border-radius:11px}.notice{font-size:11px;color:#817d91;margin-top:12px;line-height:1.5}.control-heading{display:flex;align-items:center;gap:8px;margin-bottom:12px}.control-heading .icon{width:29px;height:29px;display:grid;place-items:center;background:#f0eaff;color:var(--primary);border-radius:9px}.section-title{font-size:13px}.studio-label{display:inline-flex;align-items:center;gap:6px;background:#f0eaff;color:#6542cf;padding:6px 10px;border-radius:20px;font-size:10px;font-weight:700}
 @media(max-width:1050px){.layout{grid-template-columns:1fr}.template-grid{grid-template-columns:repeat(5,minmax(0,1fr));max-height:none}.preview-wrap{min-height:350px}}
@@ -21,7 +22,7 @@
 </head>
 <body>
 <header class="topbar">
-  <div><p class="brand">HB <span>Innovations</span></p><p class="sub">Photo Collage Studio</p></div>
+  <div><p class="brand">AutoCV <span>Designer</span></p><p class="sub">Photo Collage Studio</p></div>
   <a class="back" href="/dashboard"><i class="bi bi-arrow-left"></i> Dashboard</a>
 </header>
 
@@ -43,6 +44,7 @@
         <button class="btn btn-outline-purple" id="downloadJpgBtn" type="button"><i class="bi bi-file-image me-1"></i> Download JPG</button>
         <button class="btn btn-outline-secondary" id="clearBtn" type="button"><i class="bi bi-arrow-counterclockwise me-1"></i> Reset</button>
       </div>
+      <div class="edit-help"><strong><i class="bi bi-arrows-move me-1"></i>Photo editing:</strong> Click a photo to select it, drag inside it to reposition, and use your mouse wheel to zoom. You can also use the zoom slider.</div>
       <p class="notice">Your selected photos are processed in your browser for this collage page. For best results, upload clear photos with different orientations.</p>
     </section>
 
@@ -58,6 +60,12 @@
         <div class="d-flex justify-content-between align-items-center mb-2"><div class="control-heading mb-0"><span class="icon"><i class="bi bi-palette2"></i></span><p class="section-title mb-0">Choose a design</p></div><span id="templateCount" class="small-note">01 / 50</span></div>
         <input id="searchTemplates" class="form-control form-control-sm mb-3" placeholder="Search designs (e.g. grid, polaroid)">
         <div class="template-grid" id="templateGrid"></div>
+      </div>
+      <div class="control">
+        <div class="range-row"><label for="photoZoom" class="mb-0">Selected photo zoom</label><span id="photoZoomValue">100%</span></div>
+        <input id="photoZoom" type="range" min="10" max="300" value="100" class="form-range">
+        <div class="small-note">Select a photo first. Zoom from 10% (very small) to 300% (large); drag it to reposition, or reset its framing.</div>
+        <button class="btn btn-outline-purple btn-sm mt-2" id="resetPhotoBtn" type="button"><i class="bi bi-arrow-counterclockwise me-1"></i>Reset selected photo</button>
       </div>
       <div class="control">
         <label for="bgColor">Background colour</label>
@@ -98,6 +106,9 @@ const captionInput = document.getElementById('captionInput');
 let photos = [];
 let selectedTemplate = 1;
 let renderToken = 0;
+let selectedSlot = 0;
+let slotRects = [];
+let dragState = null;
 
 const templateNames = [
 'Classic Grid','Big Moment','Four Squares','Magazine','Mosaic','Portrait Mix','Story Tiles','Balanced','Wide Hero','Gallery Wall',
@@ -271,7 +282,7 @@ function addPhotoFiles(files) {
   valid.forEach(file=>{
     const url=URL.createObjectURL(file);
     const img=new Image();
-    img.onload=()=>{photos.push({file,img,url});updatePhotoList();drawCollage();};
+    img.onload=()=>{photos.push({file,img,url,zoom:1,panX:0,panY:0});updatePhotoList();drawCollage();};
     img.onerror=()=>URL.revokeObjectURL(url);
     img.src=url;
   });
@@ -290,14 +301,46 @@ function roundedRectPath(context,x,y,w,h,r) {
   const rad=Math.max(0,Math.min(r,w/2,h/2));
   context.beginPath();context.moveTo(x+rad,y);context.arcTo(x+w,y,x+w,y+h,rad);context.arcTo(x+w,y+h,x,y+h,rad);context.arcTo(x,y+h,x,y,rad);context.arcTo(x,y,x+w,y,rad);context.closePath();
 }
-function drawCover(img,x,y,w,h,radius) {
-  ctx.save();roundedRectPath(ctx,x,y,w,h,radius);ctx.clip();
-  const scale=Math.max(w/img.width,h/img.height);
-  const sw=w/scale, sh=h/scale;
-  const sx=(img.width-sw)/2, sy=(img.height-sh)/2;
-  ctx.drawImage(img,sx,sy,sw,sh,x,y,w,h);ctx.restore();
+function drawCover(img,x,y,w,h,radius,photoState) {
+  ctx.save();
+  roundedRectPath(ctx,x,y,w,h,radius);
+  ctx.clip();
+
+  const baseScale=Math.max(w/img.width,h/img.height);
+  const zoom=photoState?.zoom || 1;
+  const scale=baseScale*zoom;
+  const panX=photoState?.panX || 0;
+  const panY=photoState?.panY || 0;
+
+  if (zoom < 1) {
+    // Below 100%, show the photo smaller inside its tile.
+    const drawW=img.width*scale;
+    const drawH=img.height*scale;
+    const freeX=Math.max(0,w-drawW);
+    const freeY=Math.max(0,h-drawH);
+    const dx=x+(w-drawW)/2+panX*freeX/2;
+    const dy=y+(h-drawH)/2+panY*freeY/2;
+    ctx.drawImage(img,dx,dy,drawW,drawH);
+  } else {
+    // At 100% and above, fill the tile and allow zoom/crop.
+    const sw=w/scale, sh=h/scale;
+    const maxX=Math.max(0,(img.width-sw)/2);
+    const maxY=Math.max(0,(img.height-sh)/2);
+    const sx=Math.max(0,Math.min(img.width-sw,(img.width-sw)/2+panX*maxX));
+    const sy=Math.max(0,Math.min(img.height-sh,(img.height-sh)/2+panY*maxY));
+    ctx.drawImage(img,sx,sy,sw,sh,x,y,w,h);
+  }
+  ctx.restore();
 }
-function drawCollage() {
+function syncZoomControl(){
+  const photo=photos[selectedSlot % Math.max(1,photos.length)];
+  const slider=document.getElementById('photoZoom');
+  slider.disabled=!photo;
+  document.getElementById('resetPhotoBtn').disabled=!photo;
+  const zoom=photo ? Math.round(photo.zoom*100) : 100;
+  slider.value=zoom;document.getElementById('photoZoomValue').textContent=zoom+'%';
+}
+function drawCollage(showSelection = true) {
   const token=++renderToken;
   if(!photos.length){canvas.hidden=true;emptyState.hidden=false;previewInfo.textContent='Upload photos to begin';return;}
   canvas.hidden=false;emptyState.hidden=true;
@@ -333,13 +376,16 @@ function drawCollage() {
     ctx.fillStyle=pal[2];ctx.fillRect(W*.43,68,W*.14,5);
   }
   const rects=allLayouts[id-1];
+  slotRects=[];
   rects.forEach((r,i)=>{
     const x=pad+r.x*(W-2*pad), y=top+r.y*(availableH-2*pad);
     const w=r.w*(W-2*pad), h=r.h*(availableH-2*pad);
-    const photo=photos[i%photos.length];
+    const photoIndex=i%photos.length;
+    const photo=photos[photoIndex];
     const gx=gap/2, gy=gap/2;
     const frame=polaroid?Math.max(9,Math.min(22,w*.055)):film?8:(id%7===0?7:0);
     const px=x+gx, py=y+gy, pw=Math.max(1,w-gap), ph=Math.max(1,h-gap);
+    slotRects.push({x:px,y:py,w:pw,h:ph,slot:i,photoIndex,inner:polaroid?Math.max(9,Math.min(22,w*.055)):film?8:(id%7===0?7:0),bottomExtra:polaroid?Math.max(22,ph*.15):0});
     // Card shadow and white/coloured photo frame.
     ctx.save();ctx.shadowColor='rgba(35,20,65,.22)';ctx.shadowBlur=polaroid?16:((id%7===0)?9:4);ctx.shadowOffsetY=polaroid?7:3;
     ctx.fillStyle=polaroid?'#fff':film?'#25252a':(id%7===0?pal[2]:'#ffffff');
@@ -347,7 +393,7 @@ function drawCollage() {
     const inner=frame;
     if(photo){
       const bottomExtra=polaroid?Math.max(22,ph*.15):0;
-      drawCover(photo.img,px+inner,py+inner,Math.max(1,pw-inner*2),Math.max(1,ph-inner*2-bottomExtra),polaroid?0:Number(radiusRange.value));
+      drawCover(photo.img,px+inner,py+inner,Math.max(1,pw-inner*2),Math.max(1,ph-inner*2-bottomExtra),polaroid?0:Number(radiusRange.value),photo);
       if(polaroid){
         ctx.fillStyle='#554a50';ctx.textAlign='center';ctx.textBaseline='middle';ctx.font=`600 ${Math.max(10,Math.min(18,pw*.035))}px Poppins, Arial, sans-serif`;
         ctx.fillText(['memories','good times','little moments','forever'][i%4],px+pw/2,py+ph-bottomExtra/2,pw-12);
@@ -369,16 +415,63 @@ function drawCollage() {
   if(id===32 || id===33 || id===39 || id===50){
     ctx.save();ctx.fillStyle=pal[1];ctx.font='bold 35px Arial';ctx.globalAlpha=.8;ctx.fillText('✦',W-58,50);ctx.fillText('✧',35,H-42);ctx.restore();
   }
-  previewInfo.textContent=`${photos.length} photos · Design ${id} of 50`;
+  if(showSelection && slotRects.length){
+    const active=slotRects.find(r=>r.slot===selectedSlot);
+    if(active){ctx.save();ctx.strokeStyle='#7048e8';ctx.lineWidth=5;ctx.setLineDash([12,7]);roundedRectPath(ctx,active.x+2,active.y+2,active.w-4,active.h-4,8);ctx.stroke();ctx.restore();}
+  }
+  syncZoomControl();
+  previewInfo.textContent=`${photos.length} photos · Design ${id} of 50 · Selected photo ${selectedSlot%photos.length+1}`;
 }
 function downloadImage(type) {
   if(!photos.length){alert('Please upload at least one photo first.');return;}
+  // Export the collage without the purple selected-photo guide.
+  drawCollage(false);
   const link=document.createElement('a');
-  link.download=`HB Innovations-Collage-${String(selectedTemplate).padStart(2,'0')}.${type==='image/jpeg'?'jpg':'png'}`;
+  link.download=`AutoCV-Collage-${String(selectedTemplate).padStart(2,'0')}.${type==='image/jpeg'?'jpg':'png'}`;
   link.href=canvas.toDataURL(type,type==='image/jpeg'?0.94:undefined);
   link.click();
+  drawCollage(true);
 }
 photoInput.addEventListener('change',e=>addPhotoFiles(e.target.files));
+canvas.addEventListener('pointerdown',e=>{
+  if(!photos.length)return;
+  const rect=canvas.getBoundingClientRect();
+  const x=(e.clientX-rect.left)*canvas.width/rect.width;
+  const y=(e.clientY-rect.top)*canvas.height/rect.height;
+  const hit=[...slotRects].reverse().find(r=>x>=r.x&&x<=r.x+r.w&&y>=r.y&&y<=r.y+r.h);
+  if(!hit)return;
+  selectedSlot=hit.slot;const photo=photos[hit.photoIndex];
+  dragState={pointerId:e.pointerId,startX:x,startY:y,photo,hit,moved:false,panX:photo.panX,panY:photo.panY};
+  canvas.setPointerCapture(e.pointerId);canvas.classList.add('dragging');drawCollage();
+});
+canvas.addEventListener('pointermove',e=>{
+  if(!dragState)return;
+  const rect=canvas.getBoundingClientRect();
+  const x=(e.clientX-rect.left)*canvas.width/rect.width;
+  const y=(e.clientY-rect.top)*canvas.height/rect.height;
+  const dx=x-dragState.startX,dy=y-dragState.startY;
+  if(Math.abs(dx)+Math.abs(dy)>1)dragState.moved=true;
+  dragState.photo.panX=Math.max(-1,Math.min(1,dragState.panX-dx/Math.max(1,dragState.hit.w)*2/dragState.photo.zoom));
+  dragState.photo.panY=Math.max(-1,Math.min(1,dragState.panY-dy/Math.max(1,dragState.hit.h)*2/dragState.photo.zoom));
+  drawCollage();
+});
+function finishPhotoDrag(){dragState=null;canvas.classList.remove('dragging');}
+canvas.addEventListener('pointerup',finishPhotoDrag);canvas.addEventListener('pointercancel',finishPhotoDrag);
+canvas.addEventListener('wheel',e=>{
+  if(!photos.length)return;
+  const rect=canvas.getBoundingClientRect();const x=(e.clientX-rect.left)*canvas.width/rect.width;const y=(e.clientY-rect.top)*canvas.height/rect.height;
+  const hit=[...slotRects].reverse().find(r=>x>=r.x&&x<=r.x+r.w&&y>=r.y&&y<=r.y+r.h);
+  if(!hit)return;e.preventDefault();selectedSlot=hit.slot;const photo=photos[hit.photoIndex];
+  photo.zoom=Math.max(.1,Math.min(3,photo.zoom+(e.deltaY<0?.1:-.1)));drawCollage();
+},{passive:false});
+document.getElementById('photoZoom').addEventListener('input',e=>{
+  const photo=photos[selectedSlot%Math.max(1,photos.length)];if(!photo)return;
+  photo.zoom=Number(e.target.value)/100;document.getElementById('photoZoomValue').textContent=e.target.value+'%';drawCollage();
+});
+document.getElementById('resetPhotoBtn').addEventListener('click',()=>{
+  const photo=photos[selectedSlot%Math.max(1,photos.length)];if(!photo)return;
+  photo.zoom=1;photo.panX=0;photo.panY=0;drawCollage();
+});
 document.getElementById('searchTemplates').addEventListener('input',e=>renderTemplateCards(e.target.value));
 bgColor.addEventListener('input',drawCollage);
 gapRange.addEventListener('input',()=>{document.getElementById('gapValue').textContent=gapRange.value+' px';drawCollage();});
@@ -387,7 +480,7 @@ captionInput.addEventListener('input',drawCollage);
 document.getElementById('downloadBtn').addEventListener('click',()=>downloadImage('image/png'));
 document.getElementById('downloadJpgBtn').addEventListener('click',()=>downloadImage('image/jpeg'));
 document.getElementById('clearBtn').addEventListener('click',()=>{
-  photos.forEach(p=>URL.revokeObjectURL(p.url));photos=[];photoInput.value='';captionInput.value='';
+  photos.forEach(p=>URL.revokeObjectURL(p.url));photos=[];selectedSlot=0;photoInput.value='';captionInput.value='';
   bgColor.value='#ffffff';gapRange.value=12;radiusRange.value=10;
   document.getElementById('gapValue').textContent='12 px';document.getElementById('radiusValue').textContent='10 px';
   selectedTemplate=1;updatePhotoList();renderTemplateCards();drawCollage();
