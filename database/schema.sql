@@ -1,3 +1,4 @@
+
 DROP TABLE IF EXISTS certificates;
 DROP TABLE IF EXISTS projects;
 DROP TABLE IF EXISTS skills;
@@ -6,16 +7,12 @@ DROP TABLE IF EXISTS education;
 DROP TABLE IF EXISTS profiles;
 DROP TABLE IF EXISTS users;
 
-
 CREATE TABLE users (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     full_name TEXT NOT NULL,
     email TEXT NOT NULL COLLATE NOCASE UNIQUE,
     password TEXT NOT NULL,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-
-
 );
 
 CREATE TABLE profiles (
@@ -31,7 +28,7 @@ CREATE TABLE profiles (
     pincode TEXT,
     about TEXT,
     photo TEXT,
-    FOREIGN KEY(user_id) REFERENCES users(id)
+    FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
 CREATE TABLE education (
@@ -41,7 +38,7 @@ CREATE TABLE education (
     institute TEXT,
     passing_year TEXT,
     cgpa TEXT,
-    FOREIGN KEY(user_id) REFERENCES users(id)
+    FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
 CREATE TABLE experience (
@@ -51,14 +48,14 @@ CREATE TABLE experience (
     role TEXT,
     duration TEXT,
     description TEXT,
-    FOREIGN KEY(user_id) REFERENCES users(id)
+    FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
 CREATE TABLE skills (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     user_id INTEGER,
     skill_name TEXT,
-    FOREIGN KEY(user_id) REFERENCES users(id)
+    FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
 CREATE TABLE projects (
@@ -67,7 +64,7 @@ CREATE TABLE projects (
     project_name TEXT,
     description TEXT,
     github_link TEXT,
-    FOREIGN KEY(user_id) REFERENCES users(id)
+    FOREIGN KEY (user_id) REFERENCES users(id)
 );
 
 CREATE TABLE certificates (
@@ -77,5 +74,6 @@ CREATE TABLE certificates (
     organization TEXT,
     year TEXT,
     certificate_file TEXT,
-    FOREIGN KEY(user_id) REFERENCES users(id)
+    FOREIGN KEY (user_id) REFERENCES users(id)
 );
+
