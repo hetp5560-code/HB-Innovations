@@ -14,6 +14,38 @@ from photo_editor import photo_editor
 from birthday import birthday
 from collage import collage  # NEW: Collage Maker blueprint
 from functools import wraps
+import smtplib
+import ssl
+from email.message import EmailMessage
+
+MAIL_USERNAME = "wtechnical689@gmail.com"
+MAIL_PASSWORD = "nemteooiagcojix"
+
+
+def send_welcome_email(full_name, email):
+    message = EmailMessage()
+    message["Subject"] = "Welcome to HB Innovations!"
+    message["From"] = MAIL_USERNAME
+    message["To"] = email
+
+    message.set_content(f"""Hi {full_name},
+
+Welcome to HB Innovations!
+
+Thank you for registering with us.
+
+Best regards,
+Team HB Innovations
+""")
+
+    context = ssl.create_default_context()
+
+    with smtplib.SMTP("smtp.gmail.com", 587, timeout=30) as server:
+        server.ehlo()
+        server.starttls(context=context)
+        server.ehlo()
+        server.login(MAIL_USERNAME, MAIL_PASSWORD)
+        server.send_message(message)
 
 
 app = Flask(__name__)
