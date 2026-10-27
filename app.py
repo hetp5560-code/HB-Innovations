@@ -19,7 +19,7 @@ import ssl
 from email.message import EmailMessage
 
 MAIL_USERNAME = "wtechnical689@gmail.com"
-MAIL_PASSWORD = "nemteooiagcojix"
+MAIL_PASSWORD = "nemteooiagcojlxn"
 
 
 def send_welcome_email(full_name, email):
@@ -57,11 +57,29 @@ app.secret_key = "hbinnovations_secret_key"
 DATABASE = os.path.join(app.root_path, "database.db")
 
 
+
 def init_database():
     if not os.path.exists(DATABASE):
         with sqlite3.connect(DATABASE) as conn:
-            with open("database/schema.sql", "r", encoding="utf-8") as f:
+            schema_path = os.path.join(
+                os.path.dirname(os.path.abspath(__file__)),
+                "database",
+                "schema.sql"
+            )
+
+            with open(schema_path, "r", encoding="utf-8") as f:
                 conn.executescript(f.read())
+
+    # Ensure email addresses are unique in an existing database
+    with sqlite3.connect(DATABASE) as conn:
+        conn.execute("""
+            CREATE UNIQUE INDEX IF NOT EXISTS
+            idx_users_email_unique
+            ON users(email COLLATE NOCASE)
+        """)
+        conn.commit()
+
+
 
 
 # Create database and tables if they don't exist
