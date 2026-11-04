@@ -1,4 +1,5 @@
 from flask import Blueprint, render_template, session, redirect, request
+from tracking import log_activity
 
 birthday = Blueprint("birthday", __name__)
 
@@ -12,6 +13,7 @@ def birthday_page():
     if "user_id" not in session:
         return redirect("/login")
 
+    log_activity(session["user_id"], "Opened Birthday Studio", "Opened birthday studio")
     return render_template("birthday.html")
 
 
@@ -24,6 +26,7 @@ def birthday_girl():
     if "user_id" not in session:
         return redirect("/login")
 
+    log_activity(session["user_id"], "Viewed Birthday Templates", "Viewed girl birthday templates")
     return render_template(
         "birthday_templates.html",
         category="girl"
@@ -39,6 +42,7 @@ def birthday_boy():
     if "user_id" not in session:
         return redirect("/login")
 
+    log_activity(session["user_id"], "Viewed Birthday Templates", "Viewed boy birthday templates")
     return render_template(
         "birthday_templates.html",
         category="boy"
@@ -60,6 +64,7 @@ def birthday_editor():
     # Selected template number
     template = request.args.get("template", "1")
 
+    log_activity(session["user_id"], "Opened Birthday Editor", f"Opened {category} birthday template {template}")
     return render_template(
         "birthday_editor.html",
         category=category,

@@ -1247,6 +1247,12 @@ body{
 
 
 <body>
+{% if admin_preview %}
+<div style="position:sticky;top:0;z-index:99999;background:#17172b;color:#fff;padding:10px 18px;font:13px Arial;display:flex;justify-content:space-between;align-items:center;">
+<strong>ADMIN PREVIEW · This resume contains user-provided personal information</strong>
+<a href="{{ url_for('admin.admin_user_detail', user_id=user.id) }}" style="color:#c9c1ff;text-decoration:none;font-weight:bold;">← Back to User Details</a>
+</div>
+{% endif %}
 
 <!-- TOP BAR -->
 

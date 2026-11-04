@@ -6,6 +6,7 @@ import os
 import smtplib
 import sqlite3
 import ssl
+
 from email.message import EmailMessage
 from dotenv import load_dotenv
 
@@ -13,21 +14,26 @@ load_dotenv()
 
 auth = Blueprint("auth", __name__)
 
-MAIL_USERNAME = os.getenv("MAIL_USERNAME")
-MAIL_PASSWORD = os.getenv("MAIL_PASSWORD")
+
+# BREVO SMTP SETTINGS
+
+BREVO_SMTP_LOGIN = os.getenv("BREVO_SMTP_LOGIN")
+BREVO_SMTP_KEY = os.getenv("BREVO_SMTP_KEY")
+BREVO_SENDER_EMAIL = os.getenv("BREVO_SENDER_EMAIL")
 
 
 # SEND WELCOME EMAIL
 
 def send_welcome_email(full_name, email):
 
-    if not MAIL_USERNAME or not MAIL_PASSWORD:
-        print("Email credentials are missing.")
+    if not BREVO_SMTP_LOGIN or not BREVO_SMTP_KEY or not BREVO_SENDER_EMAIL:
+        print("Brevo credentials are missing.")
         return False
 
     message = EmailMessage()
+
     message["Subject"] = "Welcome to HB Innovations!"
-    message["From"] = MAIL_USERNAME
+    message["From"] = f"HB Innovations <{BREVO_SENDER_EMAIL}>"
     message["To"] = email
 
     message.set_content(
@@ -50,20 +56,36 @@ Team HB Innovations
     )
 
     try:
+
         context = ssl.create_default_context()
 
-        with smtplib.SMTP("smtp.gmail.com", 587, timeout=10) as server:
+        with smtplib.SMTP(
+            "smtp-relay.brevo.com",
+            587,
+            timeout=30
+        ) as server:
+
             server.ehlo()
+
             server.starttls(context=context)
+
             server.ehlo()
-            server.login(MAIL_USERNAME, MAIL_PASSWORD)
+
+            server.login(
+                BREVO_SMTP_LOGIN,
+                BREVO_SMTP_KEY
+            )
+
             server.send_message(message)
 
-        print("Welcome email sent successfully!")
+        print("Brevo welcome email sent successfully!")
+
         return True
 
     except Exception as error:
-        print("Welcome email failed:", repr(error))
+
+        print("Brevo email failed:", repr(error))
+
         return False
 
 
@@ -79,9 +101,11 @@ def register():
         password = request.form["password"]
 
         hashed_password = generate_password_hash(password)
+
         conn = None
 
         try:
+
             conn = get_db_connection()
 
             conn.execute(
@@ -95,23 +119,36 @@ def register():
             conn.commit()
 
         except sqlite3.IntegrityError:
+
             flash("This email is already registered.", "error")
+
             return redirect(url_for("auth.register"))
 
         except Exception as error:
+
             print("Registration error:", repr(error))
+
             flash("Registration failed. Please try again.", "error")
+
             return redirect(url_for("auth.register"))
 
         finally:
+
             if conn:
                 conn.close()
 
+        # Send Welcome Email using Brevo
         email_sent = send_welcome_email(full_name, email)
 
         if email_sent:
-            flash("Registration successful! Welcome email sent.", "success")
+
+            flash(
+                "Registration successful! Welcome email sent.",
+                "success"
+            )
+
         else:
+
             flash(
                 "Registration successful! Welcome email could not be sent.",
                 "success"
@@ -135,20 +172,25 @@ def login():
         conn = get_db_connection()
 
         try:
+
             user = conn.execute(
                 "SELECT * FROM users WHERE email = ?",
                 (email,)
             ).fetchone()
 
         finally:
+
             conn.close()
 
         if user and check_password_hash(user["password"], password):
+
             session["user_id"] = user["id"]
             session["user_name"] = user["full_name"]
+
             return redirect(url_for("dashboard"))
 
         flash("Incorrect email or password.", "error")
+
         return redirect(url_for("auth.login"))
 
     return render_template("login.html")
@@ -160,4 +202,5 @@ def login():
 def logout():
 
     session.clear()
+
     return redirect(url_for("auth.login"))

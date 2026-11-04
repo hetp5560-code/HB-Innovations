@@ -4,6 +4,7 @@ from flask import Blueprint, render_template, request, redirect, session
 from werkzeug.utils import secure_filename
 
 from config import get_db_connection
+from tracking import log_activity
 
 profile = Blueprint("profile", __name__)
 
@@ -153,6 +154,7 @@ def profile_page():
 
         conn.commit()
         conn.close()
+        log_activity(session["user_id"], "Profile Updated", "Updated personal profile information")
 
         return redirect("/education")
 

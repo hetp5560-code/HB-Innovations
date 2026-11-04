@@ -1,0 +1,5 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Admin Login | HB Innovations</title><link rel="stylesheet" href="{{ url_for('static', filename='css/admin.css') }}"></head>
+<body class="login-page"><div class="login-card"><div class="brand-mark">HB</div><p class="eyebrow">HB INNOVATIONS</p><h1>Admin Portal</h1><p class="muted">Sign in to manage users, activity and resumes.</p>
+{% with messages = get_flashed_messages(with_categories=true) %}{% for category, message in messages %}<div class="alert {{ category }}">{{ message }}</div>{% endfor %}{% endwith %}
+<form method="POST"><label>Email address</label><input type="email" name="email" placeholder="Admin email" required autocomplete="username"><label>Password</label><input type="password" name="password" placeholder="Admin password" required autocomplete="current-password"><button type="submit" class="btn primary full">Secure Login</button></form><a class="back-link" href="{{ url_for('home') }}">← Back to website</a></div></body></html>

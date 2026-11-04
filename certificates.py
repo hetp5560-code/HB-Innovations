@@ -2,6 +2,7 @@ import os
 from werkzeug.utils import secure_filename
 from flask import Blueprint, render_template, request, redirect, session
 from config import get_db_connection
+from tracking import log_activity
 
 certificates = Blueprint("certificates", __name__)
 
@@ -55,6 +56,7 @@ def certificates_page():
 
         conn.commit()
         conn.close()
+        log_activity(session["user_id"], "Certificate Added", "Added a certificate")
 
         return redirect("/templates")
 

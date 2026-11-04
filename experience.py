@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, request, redirect, session
 from config import get_db_connection
+from tracking import log_activity
 
 experience = Blueprint("experience", __name__)
 
@@ -57,6 +58,7 @@ def experience_page():
 
         conn.commit()
         conn.close()
+        log_activity(session["user_id"], "Experience Saved", "Added or updated experience details")
 
         return redirect("/skills")
 

@@ -12,40 +12,11 @@ from certificates import certificates
 from resume import resume
 from photo_editor import photo_editor
 from birthday import birthday
-from collage import collage  # NEW: Collage Maker blueprint
+from collage import collage
+from admin import admin
+from tracking import init_tracking_tables, log_activity
+
 from functools import wraps
-import smtplib
-import ssl
-from email.message import EmailMessage
-
-MAIL_USERNAME = "wtechnical689@gmail.com"
-MAIL_PASSWORD = "nemteooiagcojlxn"
-
-
-def send_welcome_email(full_name, email):
-    message = EmailMessage()
-    message["Subject"] = "Welcome to HB Innovations!"
-    message["From"] = MAIL_USERNAME
-    message["To"] = email
-
-    message.set_content(f"""Hi {full_name},
-
-Welcome to HB Innovations!
-
-Thank you for registering with us.
-
-Best regards,
-Team HB Innovations
-""")
-
-    context = ssl.create_default_context()
-
-    with smtplib.SMTP("smtp.gmail.com", 587, timeout=30) as server:
-        server.ehlo()
-        server.starttls(context=context)
-        server.ehlo()
-        server.login(MAIL_USERNAME, MAIL_PASSWORD)
-        server.send_message(message)
 
 
 app = Flask(__name__)
@@ -57,10 +28,12 @@ app.secret_key = "hbinnovations_secret_key"
 DATABASE = os.path.join(app.root_path, "database.db")
 
 
-
 def init_database():
+
     if not os.path.exists(DATABASE):
+
         with sqlite3.connect(DATABASE) as conn:
+
             schema_path = os.path.join(
                 os.path.dirname(os.path.abspath(__file__)),
                 "database",
@@ -70,20 +43,21 @@ def init_database():
             with open(schema_path, "r", encoding="utf-8") as f:
                 conn.executescript(f.read())
 
-    # Ensure email addresses are unique in an existing database
+    # Unique email index
     with sqlite3.connect(DATABASE) as conn:
+
         conn.execute("""
             CREATE UNIQUE INDEX IF NOT EXISTS
             idx_users_email_unique
             ON users(email COLLATE NOCASE)
         """)
+
         conn.commit()
 
 
-
-
-# Create database and tables if they don't exist
+# Initialize Database
 init_database()
+init_tracking_tables()
 
 
 # Register Blueprints
@@ -97,15 +71,22 @@ app.register_blueprint(certificates)
 app.register_blueprint(resume)
 app.register_blueprint(photo_editor)
 app.register_blueprint(birthday)
-app.register_blueprint(collage)  # NEW: register Collage Maker
+app.register_blueprint(collage)
+app.register_blueprint(admin)
+
 
 def login_required(view_function):
+
     @wraps(view_function)
     def wrapped_view(*args, **kwargs):
+
         if "user_id" not in session:
             return redirect("/login")
+
         return view_function(*args, **kwargs)
+
     return wrapped_view
+
 
 # Home Page
 @app.route("/")
@@ -116,16 +97,22 @@ def home():
 # Dashboard Page
 @app.route("/dashboard")
 def dashboard():
+
     if "user_id" not in session:
         return redirect("/login")
+
+    log_activity(session["user_id"], "Opened Dashboard", "Opened the user dashboard")
     return render_template("dashboard.html")
 
 
 # Template Selection Page
 @app.route("/templates")
 def templates_page():
+
     if "user_id" not in session:
         return redirect("/login")
+
+    log_activity(session["user_id"], "Viewed Resume Templates", "Opened the resume template gallery")
     return render_template("templates.html")
 
 
